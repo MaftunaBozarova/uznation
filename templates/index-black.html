@@ -1,0 +1,41 @@
+{% extends 'base-for-common.html' %}
+
+{% block title %}UzNation{% endblock %}
+
+{% block main-row-div-1 %}
+    <div class="col-lg-9 col-sm-8 col-xs-12 content">
+						<div class="img"><img src="{{ content.photo.url }}" alt="{{ content.title }}" style="width:700px;"></div>
+							<div class="text">
+								<h2>{{ content.title }}</h2>
+								<p>{{ content.body|safe }}</p>
+							</div>
+							<!-- project-area -->
+						<div class="masonry-holder">
+							<h2>Mazvuga Oid</h2>
+							<ul class="masonry add">
+								<li>
+									<div class="holder">
+										<div class="img">
+											<img src="images/2016.jpg" alt="image description" style="height:159px;">
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="holder">
+										<div class="img">
+											<img src="images/2016.jpg" alt="image description" style="height:159px;">
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="holder">
+                                        <div class="img">
+											<img src="images/2016.jpg" alt="image description" style="height:159px;">
+										</div>									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+{% endblock %}
+
+{% block style %}sidebar{% endblock %}

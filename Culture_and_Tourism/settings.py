@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+location = lambda x: os.path.join(BASE_DIR, x)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -36,7 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'culture_tourism',
     'django.contrib.staticfiles',
+
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,7 +81,7 @@ WSGI_APPLICATION = 'Culture_and_Tourism.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -101,3 +104,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = location('static')
+STATICFILES_DIRS = (
+    location('assets'),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = location('media/')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr/culture_tourism'
+    },
+}

@@ -1,0 +1,83 @@
+{% extends 'base-for-common.html' %}
+
+{% block title %}UzNation{% endblock %}
+
+{% block main-row-div-1 %}
+    <div class="col-lg-9 col-sm-8 col-xs-12 col-lg-push-3 col-sm-push-4 content">
+						<!-- gallery -->
+						<div class="img"><img src="{{ content.info_photo.url }}" alt="{{ content.info_title }}"></div>
+
+							<div class="text">
+								<h2>{{ content.title }}</h2>
+								<p>{{ content.info_body|safe }}</p>
+							</div>
+						<!-- project-area -->
+						<div class="masonry-holder">
+							<h2>Mavzuga Yaqin</h2>
+							<ul class="masonry add">
+								<li>
+									<div class="holder">
+										<div class="img">
+											<img src="images/toy2.jpg" alt="image description">
+										</div>
+										<div class="caption">
+											<div class="c1">
+												<div class="c2">
+													<strong class="title">O'zbek To'yi</strong>
+													<p>Qiz va Yigitning Uchrashuvi</p>
+													<ul class="icons">
+														<li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
+														<li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="holder">
+										<div class="img">
+											<img src="images/toy1.jpg" alt="image description">
+										</div>
+										<div class="caption">
+											<div class="c1">
+												<div class="c2">
+													<strong class="title">O'zbek To'yi</strong>
+													<p>Yigit va Qizning Uchrashuvi</p>
+													<ul class="icons">
+														<li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
+														<li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="holder">
+										<div class="img">
+											<img src="images/toy4.jpg" alt="image description" style="height:312px">
+										</div>
+										<div class="caption">
+											<div class="c1">
+												<div class="c2">
+													<strong class="title">O'zbek To'yi</strong>
+													<p>Yigit va Qizning Uchrashuvi</p>
+													<ul class="icons">
+														<li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
+														<li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+    </div>
+{% endblock %}
+
+
+{% block style %}col-xs-12 col-lg-pull-9 col-sm-pull-8 sidebar{% endblock %}
+

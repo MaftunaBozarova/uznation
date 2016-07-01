@@ -1,12 +1,9 @@
 from django.contrib import admin
-from .models import (News, Regions, OtherInfo, NationalInfo,
-                     Writer, Gallery, Library, Feedback, Promo,
-                     Slide, MainArticle, RelatedToTopic)
-
-
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ['news_title', 'news_photo', 'news_created']
-admin.site.register(News, NewsAdmin)
+from .models import (Regions, GeneralInfo, Slide,
+                     Writer, MainArticle, News, Gallery,
+                     Library, Feedback, Promo,
+                     Menu, SubMenu, MostVisited,
+                     OtherInfo, SubArticle)
 
 
 class RegionAdmin(admin.ModelAdmin):
@@ -14,19 +11,34 @@ class RegionAdmin(admin.ModelAdmin):
 admin.site.register(Regions, RegionAdmin)
 
 
-class OtherInfoAdmin(admin.ModelAdmin):
-    list_display = ['address', 'phone_1', 'email', 'website']
-admin.site.register(OtherInfo, OtherInfoAdmin)
-
-
 class NationalInfoAdmin(admin.ModelAdmin):
-    list_display = ['info_category', 'info_title', 'info_photo', 'info_author', 'info_created']
-admin.site.register(NationalInfo, NationalInfoAdmin)
+    list_display = ['info_menu', 'info_sub_menu', 'author']
+admin.site.register(GeneralInfo, NationalInfoAdmin)
 
 
 class WriterAdmin(admin.ModelAdmin):
     list_display = ['name', 'photo', 'period']
 admin.site.register(Writer, WriterAdmin)
+
+
+class MainArticleAdmin(admin.ModelAdmin):
+    list_display = ['b_tild', 'b_box']
+admin.site.register(MainArticle, MainArticleAdmin)
+
+
+class SlideAdmin(admin.ModelAdmin):
+    list_display = ['title', 'photo', 'description']
+admin.site.register(Slide, SlideAdmin)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ['news_title', 'news_photo', 'news_created']
+admin.site.register(News, NewsAdmin)
+
+
+class OtherInfoAdmin(admin.ModelAdmin):
+    list_display = ['address', 'phone_1', 'email', 'website']
+admin.site.register(OtherInfo, OtherInfoAdmin)
 
 
 class GalleryAdmin(admin.ModelAdmin):
@@ -45,20 +57,25 @@ admin.site.register(Feedback, FeedbackAdmin)
 
 
 class PromoAdmin(admin.ModelAdmin):
-    list_display = ['promo_photo', 'promo_text']
+    list_display = ['promo_text', 'promo_photo']
 admin.site.register(Promo, PromoAdmin)
 
 
-class SlideAdmin(admin.ModelAdmin):
-    list_display = ['title', 'photo', 'description']
-admin.site.register(Slide, SlideAdmin)
+class MenuAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created']
+admin.site.register(Menu, MenuAdmin)
 
 
-class MainArticleAdmin(admin.ModelAdmin):
-    list_display = ['article_title1', 'article_photo1', 'created']
-admin.site.register(MainArticle, MainArticleAdmin)
+class SubMenuAdmin(admin.ModelAdmin):
+    list_display = ['menu', 'name', 'created']
+admin.site.register(SubMenu, SubMenuAdmin)
 
 
-class RelatedAdmin(admin.ModelAdmin):
-    list_display = ['topic', 'title', 'body', 'photo']
-admin.site.register(RelatedToTopic, RelatedAdmin)
+class SubArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'photo', 'body', 'created']
+admin.site.register(SubArticle, SubArticleAdmin)
+
+
+class MostVisitedAdmin(admin.ModelAdmin):
+    list_display = ['name', 'region']
+admin.site.register(MostVisited, MostVisitedAdmin)

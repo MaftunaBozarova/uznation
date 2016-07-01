@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^', views.home, name='home'),
-    url(r'^information/(?P<category>[-\w]+)/$', views.big_texts, name='information'),
+    url(r'^$', views.index, name='home'),
+    url(r'^main/(?P<pk>\d+)/$', views.mainarticle, name='mainarticle'),
 
 ]

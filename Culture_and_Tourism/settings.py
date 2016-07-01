@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf import global_settings
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 location = lambda x: os.path.join(BASE_DIR, x)
@@ -34,12 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
     'culture_tourism',
-    'django.contrib.staticfiles',
-
-
+    'ckeditor',
+    'easy_thumbnails',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'Culture_and_Tourism.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [location('templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'Culture_and_Tourism.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'NAME': location('Uznation'),
     }
 }
 
@@ -91,7 +93,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -117,4 +119,24 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
         'URL': 'http://127.0.0.1:8983/solr/culture_tourism'
     },
+}
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'site_logo': {'size': (200, 200), 'crop': True},
+        'logo_footer': {'size': (100, 29), 'crop': True},
+        'slide': {'size': (389, 260), 'crop': True},
+        'promo': {'size': (1280, 90), 'crop': True},
+
+    }
+}
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+     'default': {
+         'toolbar': 'full',
+         },
 }

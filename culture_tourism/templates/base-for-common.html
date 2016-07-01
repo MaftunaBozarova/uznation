@@ -1,0 +1,230 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+
+	<!-- include the site animate stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<!-- include the site bootstrap stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<!-- include the font awesome stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<!-- include the site stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<!-- include the site fonts stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+	<!-- include the site responsive stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<!-- include the site color stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/color/color.css' %}">
+
+</head>
+
+<body>
+    <!-- Page Loader -->
+	<div id="pre-loader" class="loader-container">
+		<div class="loader">
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+
+    <!-- main container of all the page elements -->
+    <div id="wrapper">
+    <!-- header of the page -->
+	<header id="header" class="sticky-header fixed-top">
+			<div class="max-container">
+				<!-- main site logo -->
+				<strong class="logo">
+					<a href="{% url 'uznation:home' %}">
+						<i class="icon">UzNation</i>
+						<span class="img">
+							{% block site-logo %}{% endblock %}
+						</span>
+					</a>
+				</strong>
+				<!-- align-right -->
+				<div class="align-right">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+							</div>
+							<!-- Collect the nav links, forms, and other content for toggling -->
+                        {% block nav_bar %}
+
+                        {% endblock %}
+
+						</div>
+					</nav>
+					<div class="search-area">
+						<div class="search-box">
+							<a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
+							<input type="search" name="search-word" placeholder="Search">
+						</div>
+						<div class="btn-group">
+                          <button type="button" class="btn btn-primary btn-sm">EN</button>
+                          <button type="button" class="btn btn-primary btn-sm">RUS</button>
+                       </div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+
+    <div class="promo portfolio">
+			<div class="max-container">
+				<div class="img">
+                    {% block promo-photo %}{% endblock %}
+				</div>
+				<div class="holder">
+					<div class="frame">
+					</div>
+				</div>
+			</div>
+		</div>
+        <main id="main">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-9 col-sm-8 col-xs-12 col-lg-push-3 col-sm-push-4 content">
+                    {% block main-row-div-1 %}{% endblock %}
+                 </div>
+
+                 <div class="col-lg-3 col-sm-4 col-xs-12 col-lg-pull-9 col-sm-pull-8 sidebar">
+                     <div class="widget add wow fadeInUp" data-wow-delay="0.6s">
+                            <h2>SEARCH</h2>
+                            <div class="wpcf7">
+                                <form action="#" class="wpcf7-form" enctype="multipart/form-data">
+                                    <div class="rows">
+                                        <span class="wpcf7-form-control-wrap Searchfield">
+                                            <input type="search" name="Searchfield" value="" class="wpcf7-form-control wpcf7-text wpcf7-Search wpcf7-validates-as-required wpcf7-validates-as-Search Search-class wpcf7-use-title-as-watermark" size="12" placeholder="" />
+                                        </span>
+                                    </div>
+                                    <button type="submit" value="SEND MESSAGES"><i class="icon-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                     <div class="widget wow fadeInUp" data-wow-delay="0.6s">
+                         <h2>MOST VISITED PLACES</h2>
+                         {% block most-visited %}
+
+                         {% endblock %}
+                     </div>
+                     <div class="widget wow fadeInUp" data-wow-delay="0.6s">
+                         <h2>RASMLAR</h2>
+                         {% block pics %}
+
+                         {% endblock %}
+                     </div>
+                     <div class="widget wow fadeInUp" data-wow-delay="0.6s">
+                         <h2>SO'NGI YANGILIKLAR</h2>
+                         {% block last-news %}
+
+                         {% endblock %}
+                     </div>
+                     <div class="widget wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                     <h2>O'zbekistonda Soat</h2>
+                     <div class="tags">
+
+                         {% block clock %}
+
+                         {% endblock %}
+
+                     </div>
+                 </div>
+                 </div>
+             </div>
+         </div>
+        </main>
+
+    <!-- footer of the page -->
+    <footer id="footer">
+        <div class="max-container">
+            <div class="f1">
+                <div class="holder">
+                    <strong class="logo-footer">
+                        <a href="#">
+                            <i class="icon">UZ</i>
+                            <span>
+                                {% block logo-footer %}
+                                {% endblock %}
+                            </span>
+                            <!--<img alt="EAGLEEYES" src="images/logo-footer.svg"> -->
+                        </a>
+                    </strong>
+                    <!-- footer-txt -->
+                    <div class="footer-txt">
+                    {% block footer-txt %}
+                    {% endblock %}
+                    </div>
+                </div>
+                <div class="frame">
+						<div class="wpcf7">
+							<form action="http://htmlbeans.com/demos/eagleeyes/inc/process.php" class="wpcf7-form f-contact-form" enctype="multipart/form-data">
+								<h3>Give us feedback</h3>
+								<div class="rows">
+									<span class="wpcf7-form-control-wrap text-field-required">
+										<input type="text" name="text-field-required" value="" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required text-field-class wpcf7-use-title-as-watermark" size="12" placeholder="Name">
+									</span>
+								</div>
+								<div class="rows">
+									<span class="wpcf7-form-control-wrap Emailfield">
+										 <input type="email" name="Emailfield" value="" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email email-class wpcf7-use-title-as-watermark" size="12" placeholder="Email" />
+									</span>
+								</div>
+								<div class="rows">
+									<span class="wpcf7-form-control-wrap textarea">
+										<textarea name="textarea" class="wpcf7-form-control wpcf7-textarea textarea-class wpcf7-use-title-as-watermark" rows="9" cols="39" placeholder="Your Comment"></textarea>
+									</span>
+								</div>
+								<input id="submit" type="submit" value="SEND MESSAGES">
+							</form>
+	                        <div class="done-massage">
+	                            <strong>Thank you!</strong> We have received your message.
+	                        </div>
+						</div>
+					</div>
+            </div>
+            <div class="f2">
+                <!-- sub-nav -->
+                {% block sub-nav %}
+                {% endblock %}
+                <span class="copyright">Copyright <a href="#">UzNation</a> &copy; 2016. All sourses reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+    </div>
+
+    <span id="back-top" class="fa fa-arrow-up"></span>
+
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/functions.js' %}"></script>
+	<script type="text/javascript">
+		if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+			var msViewportStyle = document.createElement('style');
+			msViewportStyle.appendChild(
+			document.createTextNode(
+			'@-ms-viewport{width:auto!important}'
+			)
+		);
+			document.querySelector('head').appendChild(msViewportStyle)
+		}
+	</script>
+
+</body>
+
+</html>

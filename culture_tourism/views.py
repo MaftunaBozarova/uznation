@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 import time
+from django.utils.translation import ugettext as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import (News, OtherInfo, Promo, Slide, MainArticle, GeneralInfo,
@@ -14,6 +15,7 @@ from django.db.models import Q
 
 
 def search(request, search_query):
+    vaa = _('hello')
     try:
         q = request.GET['q']
         posts = News.objects.filter(news_title__search=q) | News.objects.filter(news_body__search=q)
@@ -40,7 +42,6 @@ def feedback(request):
         feedback_form = FeedBackForm(request.POST)
         if feedback_form.is_valid():
             feedback_form.save()
-            FeedBackForm
 
 
 def index(request):

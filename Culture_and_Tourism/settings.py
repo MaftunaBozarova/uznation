@@ -33,17 +33,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'culture_tourism',
     'ckeditor',
     'easy_thumbnails',
     'redactor',
-    'modeltranslation',
+    'culture_tourism',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,6 +55,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    # translation
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'Culture_and_Tourism.urls'
@@ -111,8 +113,7 @@ LANGUAGES = (
     ('uz', gettext_noop('Uzbek')),
 )
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
-MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'uz'
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
 LOCALE_PATH = (
     location('locale'),
@@ -130,12 +131,6 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = location('media/')
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/culture_tourism'
-    },
-}
 
 THUMBNAIL_ALIASES = {
     '': {

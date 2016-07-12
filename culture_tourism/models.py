@@ -1,8 +1,7 @@
 from django.db import models
-from django.utils import timezone
-from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from redactor.fields import RedactorField
+from django.utils.translation import ugettext as _
 
 
 class Menu(models.Model):
@@ -14,9 +13,8 @@ class Menu(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-            super(Menu, self).save(*args, **kwargs)
+        self.slug = slugify(self.name)
+        super(Menu, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ('-created',)
@@ -32,9 +30,8 @@ class SubMenu(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-            super(SubMenu, self).save(*args, **kwargs)
+        self.slug = slugify(self.name)
+        super(SubMenu, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ('-created',)
@@ -42,15 +39,14 @@ class SubMenu(models.Model):
 
 class SubArticle(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
-    body = RichTextField()
+    body = RedactorField(verbose_name=u'Text')
     photo = models.ImageField(upload_to='main_article/', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=250, blank=True)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-            super(SubArticle, self).save(*args, **kwargs)
+        self.slug = slugify(self.title)
+        super(SubArticle, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -75,7 +71,7 @@ class MainArticle(models.Model):
 class Regions(models.Model):
     region_name = models.CharField(max_length=70)
     region_photo = models.ImageField(upload_to='regions/', blank=True)
-    region_description = RichTextField()
+    region_description = RedactorField(verbose_name=u'Text')
 
     def __str__(self):
         return self.region_name
@@ -83,26 +79,25 @@ class Regions(models.Model):
 
 class Writer(models.Model):
     PERIOD = (
-        ('first', 'till 12 century'),
-        ('second', 'from 12 to 18 century'),
-        ('third', 'from 18 century till now')
+        ('first', _('till 12 century')),
+        ('second', _('from 12 to 18 century')),
+        ('third', _('from 18 century till now'))
     )
     name = models.CharField(max_length=200)
     photo = models.ImageField(upload_to='writers/', blank=True)
     period = models.CharField(max_length=50, choices=PERIOD, default='second')
-    # TODO:RichTextField
-    description = RichTextField()
+    description = RedactorField(verbose_name=u'Text')
 
 
 class Slide(models.Model):
     title = models.TextField(blank=True)
     photo = models.ImageField(upload_to='slide/', blank=False)
-    description = RichTextField(blank=True)
+    description = RedactorField(verbose_name=u'Text')
     created = models.DateTimeField(auto_now_add=True)
 
 
 class OtherInfo(models.Model):
-    description = RichTextField()
+    description = RedactorField(verbose_name=u'Text')
     address = models.CharField(max_length=255, blank=True)
     phone_1 = models.CharField(max_length=17, blank=True)
     phone_2 = models.CharField(max_length=17, blank=True)
@@ -119,12 +114,11 @@ class News(models.Model):
     news_body = RedactorField(verbose_name=u'Text')
     news_created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=250, blank=True)
-# TODO:change all RichTextFields to Redactor
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.news_title)
-            super(News, self).save(*args, **kwargs)
+        self.slug = slugify(self.news_title)
+        super(News, self).save(*args, **kwargs)
+    
     class Meta:
         ordering = ('-news_created', )
 
@@ -132,7 +126,7 @@ class News(models.Model):
 class Gallery(models.Model):
     category = models.CharField(max_length=50, blank=True)
     photo = models.ImageField(upload_to='gallery/')
-    description = RichTextField()
+    description = RedactorField(verbose_name=u'Text')
     created = models.DateTimeField(auto_now_add=True)
 
 
@@ -140,14 +134,14 @@ class Library(models.Model):
     lib_name = models.CharField(max_length=255, blank=True)
     lib_photo = models.ImageField(upload_to='library/', blank=True)
     lib_file = models.FileField(upload_to='library/', blank=True)
-    lib_description = RichTextField()
+    lib_description = RedactorField(verbose_name=u'Text')
     lib_created = models.DateTimeField(auto_now_add=True, blank=True)
 
 
 class Feedback(models.Model):
     name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(blank=True)
-    comment = RichTextField()
+    comment = RedactorField(verbose_name=u'Text')
     created = models.DateTimeField(auto_now_add=True, blank=True)
     active = models.BooleanField(default=False, blank=True)
 
@@ -157,7 +151,7 @@ class Feedback(models.Model):
 
 class Promo(models.Model):
     promo_photo = models.ImageField(upload_to='promo/', blank=True)
-    promo_text = RichTextField()
+    promo_text = RedactorField(verbose_name=u'Text')
     promo_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -168,7 +162,7 @@ class MostVisited(models.Model):
     title = models.CharField(max_length=200)
     region = models.ForeignKey(Regions, related_name='most_visiteds')
     photo = models.ImageField(upload_to='most-visited/', null=True)
-    body = RichTextField(null=True)
+    body = RedactorField(verbose_name=u'Text', null=True)
     n_slug = models.SlugField(max_length=250, blank=True)
     r_slug = models.SlugField(max_length=250, blank=True)
 

@@ -3,7 +3,7 @@ from .models import *
 
 
 class MenuTranslation(TranslationOptions):
-    fields = ('name', )
+    fields = ('name',)
 
 
 class SubMenuTranslation(TranslationOptions):
@@ -38,6 +38,21 @@ class NewsTranslation(TranslationOptions):
     fields = ('news_title', 'news_data', 'news_body',)
 
 
+class GalleryTranslation(TranslationOptions):
+    fields = ('category', 'description',)
+
+
+class LibraryTranslation(TranslationOptions):
+    fields = ('lib_name', 'lib_description',)
+
+
+class PromoTranslation(TranslationOptions):
+    fields = ('promo_text',)
+
+
+class MostVisitedTranslation(TranslationOptions):
+    fields = ('title', 'body',)
+
 translator.register(Menu, MenuTranslation)
 translator.register(SubMenu, SubMenuTranslation)
 translator.register(SubArticle, SubArticleTranslation)
@@ -47,3 +62,7 @@ translator.register(Writer, WriterTranslation)
 translator.register(Slide, SliderTranslation)
 translator.register(OtherInfo, OtherInfoTranslation)
 translator.register(News,NewsTranslation)
+translator.register(Gallery, GalleryTranslation)
+translator.register(Library, LibraryTranslation)
+translator.register(Promo, PromoTranslation)
+translator.register(MostVisited, MostVisitedTranslation)

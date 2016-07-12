@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('culture_tourism.urls', namespace='uznation')),
+    url(r'^redactor/', include('redactor.urls')),
 
 ]
 if settings.DEBUG:

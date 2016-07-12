@@ -1,6 +1,6 @@
 /*
-Theme Name: EAGLEEYES
-Author: Anonymous
+Theme Name: UzNation
+Author: UzNation
 Author URI:
 Version: 1
 Description: Base theme for Wordpress
@@ -1165,6 +1165,7 @@ a:focus {
 #header .navbar-default {
 	width: 80%;
 	float: left;
+  margin-left: -60px;
 }
 
 #header .navbar-nav > li > a {

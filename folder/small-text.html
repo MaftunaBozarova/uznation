@@ -1,0 +1,151 @@
+{% extends 'base-for-common.html' %}
+
+{% block title %}UzNation{% endblock %}
+
+<!-- TODO: put image here-->
+{% block site-logo %}<img src="" alt="UzNation">{% endblock %}
+
+{% block nav_bar %}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        {% for m in menus.all %}
+            {% if m.sub_menu != 'None' %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ m.name }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for sub in m.sub_menu.all %}
+                            <li><a href="{% url 'uznation:info-with-sub' slug_m=m.name|slugify slug_sub=sub.name|slugify %}">{{ sub.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'uznation:info' slug_m=m.name|slugify %}">{{ m.name }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block promo-photo %}
+<!-- TODO: put image here-->
+    <img src="{{ promo.photo.url }}" alt="image description" class="font">
+{% endblock %}
+
+{% block main %}
+    {% block main-row-div-1 %}
+    <div class="col-lg-9 col-sm-8 col-xs-12 col-lg-push-3 col-sm-push-4 content">
+						<div class="article-holder">
+                            {% for content in contents %}
+                            <!-- article -->
+							<article class="article side">
+                            {% if forloop.counter|divisibleby:2 %}
+                                <div class="image wow fadeInLeft" data-wow-delay="0.6s">
+									<img src="{{ content.photo.url }}" alt="{{ content.title }}">
+								</div>
+                                <div class="text wow fadeInRight" data-wow-delay="0.6s">
+
+									<div class="txt">
+										<h2>{{ content.title }}</h2>
+										<p>{{ content.body|safe }}</p>
+										<a class="more" href="#">
+											<span>BATAFSIL</span>
+											<i class="icon-right-thin"></i>
+										</a>
+									</div>
+								</div>
+                                {% else %}
+                                    <div class="text wow fadeInLeft" data-wow-delay="0.6s">
+
+                                        <div class="txt">
+                                            <h2>{{ content.title }}</h2>
+                                            <p>{{ content.body|safe }}</p>
+                                            <a class="more" href="#">
+                                                <span>BATAFSIL</span>
+                                                <i class="icon-right-thin"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="image wow fadeInRight" data-wow-delay="0.6s">
+                                        <img src="{{ content.photo.url }}" alt="{{ content.title }}">
+                                    </div>
+                            {% endif %}
+
+							</article>
+                            {% endfor %}
+						</div>
+						<!-- paginations -->
+						<div class="paginations wow fadeInUp" data-wow-delay="0.6s">
+							<ul>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#"><i class="icon-right-open-mini"></i></a></li>
+							</ul>
+						</div>
+					</div>
+{% endblock %}
+
+    {% block most-visited %}
+<!-- TODO: most visited-->
+    {% endblock %}
+
+    {% block pics %}
+<!-- TODO: pics-->
+    {% endblock %}
+
+    {% block last-news %}
+<!-- TODO: lastnews-->
+    {% endblock %}
+
+{% endblock %}
+
+{% block logo-footer %}
+    <!-- TODO: logo-footer-->
+    <!--<img alt="UzNation" src="{{ info.logo_footer.url }}">-->
+{% endblock %}
+
+{% block footer-txt %}
+<div class="footer-txt">
+    <div class="text">
+        <p>
+            {{ info.description|safe }}
+        </p>
+        <div class="contact">
+            {% if info.address %}
+                <address><span class="yellow">Address:</span>{{ info.address|safe }}</address>
+            {% endif %}
+            {% if info.email %}
+                <span class="email"><span class="yellow">Email: </span><a href="{{ info.email }}">{{ info.email }}</a></span>
+            {% endif %}
+            {% if info.phone_1 %}
+                <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
+            {% endif %}
+            {% if info.phone_2 %}
+                <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <ul class="testimonial">
+        {% for news in all_news.all %}
+            <li>
+                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a><br/>{{ news.news_body|safe }}</p>
+                <span>{{ news.news_created|safe }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block sub-nav %}
+<ul class="sub-nav">
+    {% for m in menus.all %}
+        {% if not m.sub_menu %}
+            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

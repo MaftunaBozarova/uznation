@@ -1,0 +1,159 @@
+{% extends 'base-for-common.html' %}
+
+{% block title %}UzNation{% endblock %}
+<!-- TODO: put image here-->
+{% block site-logo %}<!--<img src="" alt="UzNation">-->{% endblock %}
+
+{% block nav_bar %}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        {% for m in menus.all %}
+            {% if m.sub_menu.last != 'None' %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ m.name }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for sub in m.sub_menu.all %}
+                            <li><a href="#">{{ sub.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li>
+                    <a href="#">{{ m.name }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block promo-photo %}
+<!-- TODO: put image here-->
+    <img src="{{ promo.promo_photo.url }}" alt="image description" class="font">
+{% endblock %}
+
+    {% block main-row-div-1 %}
+
+    <div class="img"><img src="{{ content.photo.url }}" alt="{{ content.title }}" style="width:900px; height:500px;"></div>
+        <div class="text">
+            <h2>{{ content.title }}</h2>
+            <p>{{ content.body|safe }}</p>
+        </div>
+
+
+        <!-- gallery -->
+
+        <!-- project-area -->
+        <div class="masonry-holder">
+            <h2>Mavzuga Oid</h2>
+            <ul class="masonry add">
+                {% if related_topics %}
+                {% for related in related_topics.all %}
+                <li>
+                    <div class="holder">
+                        <div class="img">
+                            <img src="{{ related.photo.url }}" alt="{{ related.title }}">
+                        </div>
+                        <div class="caption">
+                            <div class="c1">
+                                <div class="c2">
+                                    <strong class="title">{{ related.title }}</strong>
+
+                                    <ul class="icons">
+                                        <li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
+                                        <li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            {% endif %}
+            </ul>
+        </div>
+{% endblock %}
+
+    {% block most-visited %}
+        <ul class="categories">{% for visited in most_visited %}
+        <li><a href="#">{{ visited }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endblock %}
+
+    {% block pics %}
+        <ul class="instagram">
+        {% for pic in gallery %}
+        <li><a href="#"><img src="{{ pic.photo.url }}" alt="{{ pic.description|safe }}" style="width:83px; height:83px;"></a></li>
+        {% endfor %}
+        </ul>
+<!-- TODO: pics-->
+    {% endblock %}
+
+    {% block last-news %}
+        <ul class="recent">
+            {% for news in all_news %}
+                <li>
+                    <div class="img">
+                        <a href="#"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}"></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="#">{{ news.news_title }}</a></h3>
+                        <time datetime="2016-01-02 16:00">{{ news.news_created }}</time>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+<!-- TODO: lastnews-->
+    {% endblock %}
+{% block clock %}
+    {{ clock }}
+{% endblock %}
+
+{% block logo-footer %}
+    <!-- TODO: logo-footer-->
+    <!--<img alt="UzNation" src="{{ info.logo_footer.url }}">-->
+{% endblock %}
+
+{% block footer-txt %}
+    <div class="text">
+        <p>
+            {{ info.description|safe }}
+        </p>
+        <div class="contact">
+            {% if info.address %}
+                <address><span class="yellow">Address:</span>{{ info.address|safe }}</address>
+            {% endif %}
+            {% if info.email %}
+                <span class="email"><span class="yellow">Email: </span><a href="{{ info.email }}">{{ info.email }}</a></span>
+            {% endif %}
+            {% if info.phone_1 %}
+                <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
+            {% endif %}
+            {% if info.phone_2 %}
+                <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <ul class="testimonial">
+        {% for news in all_news.all %}
+            <li>
+                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
+                <span>{{ news.news_created|safe }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block sub-nav %}
+<ul class="sub-nav">
+    {% for m in menus.all %}
+        {% if not m.sub_menu %}
+            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

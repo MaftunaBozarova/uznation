@@ -8,25 +8,35 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
         {% for m in menus %}
-            {% if m.sub_menu.exsists %}
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for sub in m.sub_menu.all %}
-                            <li><a href="#">{{ sub.name }}</a></li>
+                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
-            {% else %}
-                <li>
-                    <a href="#">{{ m.name }}</a>
-                </li>
-            {% endif %}
         {% endfor %}
     </ul>
 </div><!-- /.navbar-collapse -->
+{% endblock %}
+
+{% block search %}
+<div class="search-box">
+<form method="post" action="." name="search">
+    <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
+    {% csrf_token %}
+    {{ search_form.as_p }}
+    <input type="submit" value="Search" name="search_web">
+</form>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-sm">EN</button>
+        <button type="button" class="btn btn-primary btn-sm">RUS</button>
+    </div>
+</div>
 {% endblock %}
 
 {% block main %}
@@ -252,8 +262,116 @@
                         </div>
                     </div>
                 {% endif %}
-
             {% endfor %}
+                <div class="info info-6">
+						<div class="txt-frame wow fadeInUp" data-wow-delay="0.6s">
+                            {% for n in all_news %}
+                            {% if forloop.counter == 1 %}
+                                <ul class="text-box team1">
+                                    <li>
+                                        <h2><a href="{% url 'uznation:news' title=n.news_title|slugify %}">{{ n.news_title }}</a></h2>
+                                        <span>{{ n.news_data }}</span>
+                                        <ul class="social-networks">
+                                            <li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+                                            <li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+                                            <li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+                                            <li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>{{ n.news_body|safe }}</p>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            {% if forloop.counter == 2 %}
+                                <ul class="text-box team2">
+                                <li>
+                                    <h2><a href="{% url 'uznation:news' title=n.news_title|slugify %}">{{ n.news_title }}</a></h2>
+                                    <span>{{ n.news_data }}</span>
+                                    <ul class="social-networks">
+                                            <li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+                                            <li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+                                            <li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+                                            <li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+                                        </ul>
+                                </li>
+                                <li>
+									<p>{{ n.news_body|safe }}</p>
+								</li>
+                                </ul>
+                            {% endif %}
+                            {% if forloop.counter == 3 %}
+                               <ul class="text-box team3">
+                                <li>
+                                    <h2><a href="{% url 'uznation:news' title=n.news_title|slugify %}">{{ n.news_title }}</a></h2>
+                                    <span>{{ n.news_data }}</span>
+                                    <ul class="social-networks">
+                                            <li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+                                            <li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+                                            <li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+                                            <li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+                                        </ul>
+                                </li>
+                                <li>
+									<p>{{ n.news_body|safe }}</p>
+								</li>
+                                </ul>
+                            {% endif %}
+                            {% endfor %}
+							<div class="img-holder wow fadeInUp" data-wow-delay="0.5s">
+                                {% for news in all_news %}
+                                    {% if forloop.counter == 1 %}
+                                    <div class="box box1">
+									<div class="img"><a href="#" class="team1-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team1-opener">{{ news.news_title }}</a></h3>
+										<span class="designation">{{ news.news_created }}</span>
+									</div>
+								</div>
+                                    {% endif %}
+                                {% if forloop.counter == 2 %}
+                                    <div class="box box2">
+									<div class="img"><a href="#" class="team2-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team2-opener">{{ news.news_title }}</a></h3>
+										<span class="designation">{{ news.news_created }}</span>
+									</div>
+								</div>
+                                {% endif %}
+                                    {% if forloop.counter == 3 %}
+                                    <div class="box box3">
+									<div class="img"><a href="#" class="team3-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team3-opener">{{ news.news_title }}</a></h3>
+										<span class="designation">{{ news.news_created }}</span>
+									</div>
+								</div>
+                                {% endif %}
+                                {% endfor %}
+
+
+							</div>
+						</div>
+						<div class="img-frame">
+							<div class="image wow fadeInRight" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInRight;">
+                                {% for new in all_news %}
+                                    {% if forloop.counter == 1 %}
+                                        <img src="{{ new.news_photo.url }}" alt="image description" class="team1-img" style="width:400px; height:550px">
+                                    {% endif %}
+                                    {% if forloop.counter == 2 %}
+                                        <img src="{{ new.news_photo.url }}" alt="image description" class="team2-img" style="width:400px; height:550px">
+                                    {% endif %}
+                                    {% if forloop.counter == 3 %}
+                                        <img src="{{ new.news_photo.url }}" alt="image description" class="team3-img" style="width:400px; height:550px">
+                                    {% endif %}
+                                {% endfor %}
+							</div>
+							<div class="text wow fadeInRight" data-wow-delay="0.3s">
+								<h2 class="tild">Yangiliklar</h2>
+								<a href="{% url 'uznation:news' title='last' %}" class="more">Batafsil</a>
+							</div>
+						</div>
+				    </div>
             {% endblock %}
         </div>
     </div>
@@ -289,8 +407,8 @@
     <ul class="testimonial">
         {% for news in all_news.all %}
             <li>
-                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
-                <span>{{ news.news_created|safe }}</span>
+                <p><a href="{% url 'uznation:news' title=news.news_title|slugify %}"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
+                <span>{{ news.news_created }}</span>
             </li>
         {% endfor %}
     </ul>
@@ -298,28 +416,29 @@
 {% endblock %}
 
 {% block feedback %}
-    <form action="." class="wpcf7-form f-contact-form" enctype="multipart/form-data" method="post">
-    <h3>Give us feedback</h3>
-        {{ feedback_form.media }}
-    {{ feedback_form.non_field_errors }}
-    <div class="rows">
-    {{ feedback_form.name.errors }}
-        <label for="{{ feedback_form.name.id_for_label }}">Name: </label>
-        {{ feedback_form.name }}
-    </div>
-    <div class="rows">
-        {{ feedback_form.email.errors }}
-        {{ feedback_form.email.label_tag }}
-        {{ feedback_form.email }}
-    </div>
-    <div class="rows">
-       {{ feedback_form.comment.errors }}
-        {{ feedback_form.comment.label_tag }}
-    {{ feedback_form.comment }}
-    </div>
-
-    <input id="submit" type="submit" value="Send FeedBack">
+    <form action="{% url 'uznation:feedback' %}" class="wpcf7-form f-contact-form" enctype="multipart/form-data">
+								<h3>Give us feedback</h3>
+        {% csrf_token %}
+        <div class="rows">
+            <span class="wpcf7-form-control-wrap text-field-required">
+                <input type="text" name="name" value="" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required text-field-class wpcf7-use-title-as-watermark" size="12" placeholder="Name">
+            </span>
+        </div>
+        <div class="rows">
+            <span class="wpcf7-form-control-wrap Emailfield">
+                <input type="email" name="email" value="" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email email-class wpcf7-use-title-as-watermark" size="12" placeholder="Email" />
+            </span>
+        </div>
+        <div class="rows">
+            <span class="wpcf7-form-control-wrap textarea">
+                <textarea name="comment" class="wpcf7-form-control wpcf7-textarea textarea-class wpcf7-use-title-as-watermark" rows="9" cols="39" placeholder="Your Comment"></textarea>
+            </span>
+        </div>
+        <input id="submit" type="submit" value="SEND MESSAGES">
     </form>
+    <div class="done-massage">
+        <strong>Thank you!</strong> We have received your message.
+    </div>
 {% endblock %}
 
 {% block sub-nav %}

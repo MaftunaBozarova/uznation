@@ -2,29 +2,42 @@ from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
+from redactor.fields import RedactorField
 
 
 class Menu(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+            super(Menu, self).save(*args, **kwargs)
+
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
 
 class SubMenu(models.Model):
     menu = models.ForeignKey(Menu, related_name='sub_menu')
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+            super(SubMenu, self).save(*args, **kwargs)
+
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
 
 class SubArticle(models.Model):
@@ -32,6 +45,12 @@ class SubArticle(models.Model):
     body = RichTextField()
     photo = models.ImageField(upload_to='main_article/', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=250, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            super(SubArticle, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -95,10 +114,19 @@ class OtherInfo(models.Model):
 
 class News(models.Model):
     news_title = models.CharField(max_length=200, blank=True, db_index=True)
-    news_slug = models.SlugField(max_length=200, blank=True)
+    news_data = models.CharField(max_length=200, blank=True)
     news_photo = models.ImageField(upload_to='news/', blank=True)
-    news_body = RichTextField()
-    news_created = models.DateTimeField(default=timezone.now)
+    news_body = RedactorField(verbose_name=u'Text')
+    news_created = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=250, blank=True)
+# TODO:change all RichTextFields to Redactor
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.news_title)
+            super(News, self).save(*args, **kwargs)
+    class Meta:
+        ordering = ('-news_created', )
 
 
 class Gallery(models.Model):
@@ -137,9 +165,17 @@ class Promo(models.Model):
 
 
 class MostVisited(models.Model):
-    name = models.CharField(max_length=200)
-    region = models.ForeignKey(Regions, related_name='region')
+    title = models.CharField(max_length=200)
+    region = models.ForeignKey(Regions, related_name='most_visiteds')
+    photo = models.ImageField(upload_to='most-visited/', null=True)
+    body = RichTextField(null=True)
+    n_slug = models.SlugField(max_length=250, blank=True)
+    r_slug = models.SlugField(max_length=250, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.n_slug = slugify(self.title)
+        self.r_slug = slugify(self.region.region_name)
+        super(MostVisited, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
-
+        return self.title

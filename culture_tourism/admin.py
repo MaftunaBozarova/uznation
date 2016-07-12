@@ -77,5 +77,5 @@ admin.site.register(SubArticle, SubArticleAdmin)
 
 
 class MostVisitedAdmin(admin.ModelAdmin):
-    list_display = ['name', 'region']
+    list_display = ['title', 'region']
 admin.site.register(MostVisited, MostVisitedAdmin)

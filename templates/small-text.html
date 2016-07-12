@@ -8,38 +8,37 @@
 {% block nav_bar %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-        {% for m in menus.all %}
-            {% if m.sub_menu != 'None' %}
+        {% for m in menus %}
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for sub in m.sub_menu.all %}
-                            <li><a href="{% url 'uznation:info-with-sub' slug_m=m.name|slugify slug_sub=sub.name|slugify %}">{{ sub.name }}</a></li>
+                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
-            {% else %}
-                <li>
-                    <a href="{% url 'uznation:info' slug_m=m.name|slugify %}">{{ m.name }}</a>
-                </li>
-            {% endif %}
         {% endfor %}
     </ul>
-</div>
+</div><!-- /.navbar-collapse -->
 {% endblock %}
 
 {% block promo-photo %}
 <!-- TODO: put image here-->
-    <img src="{{ promo.photo.url }}" alt="image description" class="font">
+    <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
 {% endblock %}
 
-{% block main %}
+<div class="hide-for-small bread-crumbs large-12 columns">
+    <a href="{% url 'uznation:home' %}" title="Home">Main page</a> »» <a href="#" title="{{ middle }}">{{ middle }}</a>{% if last %} »» <a href="#" title="{{ last }}">{{ last }}</a>{% endif %}
+</div>
+<br>
+
     {% block main-row-div-1 %}
     <div class="col-lg-9 col-sm-8 col-xs-12 col-lg-push-3 col-sm-push-4 content">
 						<div class="article-holder">
-                            {% for content in contents %}
+                            {% for content in posts %}
                             <!-- article -->
 							<article class="article side">
                             {% if forloop.counter|divisibleby:2 %}
@@ -50,8 +49,8 @@
 
 									<div class="txt">
 										<h2>{{ content.title }}</h2>
-										<p>{{ content.body|safe }}</p>
-										<a class="more" href="#">
+										<p>{{ content.body|truncatechars:300|safe }}</p>
+										<a class="more" href="{% url 'uznation:small' title=content.title|slugify m=middle s=last %}">
 											<span>BATAFSIL</span>
 											<i class="icon-right-thin"></i>
 										</a>
@@ -62,8 +61,8 @@
 
                                         <div class="txt">
                                             <h2>{{ content.title }}</h2>
-                                            <p>{{ content.body|safe }}</p>
-                                            <a class="more" href="#">
+                                            <p>{{ content.body|truncatechars:300|safe }}</p>
+                                            <a class="more" href="{% url 'uznation:small' title=content.title|slugify m=middle s=last%}">
                                                 <span>BATAFSIL</span>
                                                 <i class="icon-right-thin"></i>
                                             </a>
@@ -78,29 +77,43 @@
                             {% endfor %}
 						</div>
 						<!-- paginations -->
-						<div class="paginations wow fadeInUp" data-wow-delay="0.6s">
-							<ul>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#"><i class="icon-right-open-mini"></i></a></li>
-							</ul>
-						</div>
+						{% include 'pagination.html' with page=posts %}
 					</div>
 {% endblock %}
 
     {% block most-visited %}
-<!-- TODO: most visited-->
+        <ul class="categories">{% for visited in most_visited %}
+        <li><a href="{% url 'uznation:most_visited' name=visited.title|slugify region=visited.region|slugify %}">{{ visited.title }}</a></li>
+        {% endfor %}
+        </ul>
     {% endblock %}
 
     {% block pics %}
-<!-- TODO: pics-->
+<ul class="instagram">
+        {% for pic in gallery %}
+        <li><a href="#"><img src="{{ pic.photo.url }}" alt="{{ pic.description|safe }}" style="width:83px; height:83px;"></a></li>
+        {% endfor %}
+        </ul>
     {% endblock %}
 
     {% block last-news %}
-<!-- TODO: lastnews-->
-    {% endblock %}
+<ul class="recent">
+            {% for news in all_news %}
+                <li>
+                    <div class="img">
+                        <a href="{% url 'uznation:news' title=news.news_title|slugify %}"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}"></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="{% url 'uznation:news' title=news.news_title|slugify %}">{{ news.news_title }}</a></h3>
+                        <time datetime="2016-01-02 16:00">{{ news.news_created }}</time>
+                    </div>
+                </li>
+            {% endfor %}
 
+        </ul>
+    {% endblock %}
+{% block clock %}
+    <h2>{{ clock }}</h2>
 {% endblock %}
 
 {% block logo-footer %}
@@ -109,8 +122,7 @@
 {% endblock %}
 
 {% block footer-txt %}
-<div class="footer-txt">
-    <div class="text">
+ <div class="text">
         <p>
             {{ info.description|safe }}
         </p>
@@ -125,6 +137,7 @@
                 <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
             {% endif %}
             {% if info.phone_2 %}
+                <br>
                 <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
             {% endif %}
         </div>
@@ -132,12 +145,11 @@
     <ul class="testimonial">
         {% for news in all_news.all %}
             <li>
-                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a><br/>{{ news.news_body|safe }}</p>
-                <span>{{ news.news_created|safe }}</span>
+                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
+                <span>{{ news.news_created }}</span>
             </li>
         {% endfor %}
     </ul>
-</div>
 {% endblock %}
 
 {% block sub-nav %}

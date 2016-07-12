@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'culture_tourism',
     'ckeditor',
     'easy_thumbnails',
+    'redactor',
+    'modeltranslation',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,6 +103,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+gettext_noop = lambda s: s
+
+LANGUAGES = (
+    ('en', gettext_noop('English')),
+    ('ru', gettext_noop('Russian')),
+    ('uz', gettext_noop('Uzbek')),
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'uz'
+
+LOCALE_PATH = (
+    location('locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -140,3 +156,6 @@ CKEDITOR_CONFIGS = {
          'toolbar': 'full',
          },
 }
+
+REDACTOR_OPTIONS = {'lang': 'en', 'plugins': ['clips', 'textexpander', 'filemanager', 'fullscreen', 'imagemanager', 'properties', 'source', 'table', 'video']}
+REDACTOR_UPLOAD = 'uploads/'

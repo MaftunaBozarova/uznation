@@ -1,0 +1,122 @@
+{% extends 'base-for-common.html' %}
+
+{% block title %}UzNation | News{% endblock %}
+<!-- TODO: put image here-->
+{% block site-logo %}<!--<img src="" alt="UzNation">-->{% endblock %}
+
+{% block nav_bar %}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        {% for m in menus %}
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ m.name }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for sub in m.sub_menu.all %}
+                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+        {% endfor %}
+    </ul>
+</div><!-- /.navbar-collapse -->
+{% endblock %}
+
+{% block promo-photo %}
+<!-- TODO: put image here-->
+    <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
+{% endblock %}
+
+    {% block main-row-div-1 %}
+
+    <div class="img"><img src="{{ content.news_photo.url }}" alt="{{ content.news_title }}" style="width:900px; height:500px;"></div>
+        <div class="text">
+            <h2>{{ content.news_title }}</h2>
+            <p>{{ content.news_body|safe }}</p>
+        </div>
+{% endblock %}
+
+    {% block most-visited %}
+        <ul class="categories">{% for visited in most_visited %}
+        <li><a href="{% url 'uznation:most_visited' name=visited.title|slugify region=visited.region|slugify %}">{{ visited }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endblock %}
+
+    {% block pics %}
+        <ul class="instagram">
+        {% for pic in gallery %}
+        <li><a href="#"><img src="{{ pic.photo.url }}" alt="{{ pic.description|safe }}" style="width:83px; height:83px;"></a></li>
+        {% endfor %}
+        </ul>
+<!-- TODO: pics-->
+    {% endblock %}
+
+    {% block last-news %}
+        <ul class="recent">
+            {% for news in all_news %}
+                <li>
+                    <div class="img">
+                        <a href="{% url 'uznation:news' title=news.news_title|slugify %}"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}"></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="{% url 'uznation:news' title=news.news_title|slugify %}">{{ news.news_title }}</a></h3>
+                        <time datetime="2016-01-02 16:00">{{ news.news_created }}</time>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    {% endblock %}
+{% block clock %}
+    <h2>{{ clock }}</h2>
+{% endblock %}
+
+{% block logo-footer %}
+    <!-- TODO: logo-footer-->
+    <!--<img alt="UzNation" src="{{ info.logo_footer.url }}">-->
+{% endblock %}
+
+{% block footer-txt %}
+    <div class="text">
+        <p>
+            {{ info.description|safe }}
+        </p>
+        <div class="contact">
+            {% if info.address %}
+                <address><span class="yellow">Address:</span>{{ info.address|safe }}</address>
+            {% endif %}
+            {% if info.email %}
+                <span class="email"><span class="yellow">Email: </span><a href="{{ info.email }}">{{ info.email }}</a></span>
+            {% endif %}
+            {% if info.phone_1 %}
+                <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
+            {% endif %}
+            {% if info.phone_2 %}
+                <br>
+                <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <ul class="testimonial">
+        {% for news in all_news.all %}
+            <li>
+                <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
+                <span>{{ news.news_created }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block sub-nav %}
+<ul class="sub-nav">
+    {% for m in menus.all %}
+        {% if not m.sub_menu %}
+            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

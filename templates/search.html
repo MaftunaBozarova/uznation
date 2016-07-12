@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for result in searchN %}
+    {{ result.news_title }}
+    {{ result.news_body|safe }}
+    <p>------------------------------------------------------------</p>
+    {% empty %}
+    <p>Nothing matched</p>
+{% endfor %}
+{% for result in searchS %}
+{{ result.title }}
+    <br>
+    {{ result.body|safe }}
+        <p>------------------------------------------------------------</p>
+{% empty %}
+    <p>Nothing matched</p>
+{% endfor %}
+
+{% for result in searchR %}
+{{ result.region_name }}
+    {{ result.region_description|safe }}
+    {% empty %}
+    <p>Nothing matched</p>
+{% endfor %}
+
+{% for result in searchW %}
+{{ result.name }}
+    {{ result.description|safe }}
+    {% empty %}
+    <p>Nothing matched</p>
+{% endfor %}
+
+
+</body>
+</html>

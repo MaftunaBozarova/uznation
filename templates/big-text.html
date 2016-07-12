@@ -7,32 +7,31 @@
 {% block nav_bar %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-        {% for m in menus.all %}
-            {% if m.sub_menu.last != 'None' %}
+        {% for m in menus %}
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for sub in m.sub_menu.all %}
-                            <li><a href="#">{{ sub.name }}</a></li>
+                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
-            {% else %}
-                <li>
-                    <a href="#">{{ m.name }}</a>
-                </li>
-            {% endif %}
         {% endfor %}
     </ul>
-</div>
+</div><!-- /.navbar-collapse -->
 {% endblock %}
 
 {% block promo-photo %}
 <!-- TODO: put image here-->
-    <img src="{{ promo.promo_photo.url }}" alt="image description" class="font">
+    <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
 {% endblock %}
+<div class="hide-for-small bread-crumbs large-12 columns">
+    <a href="{% url 'uznation:home' %}" title="Home">Main page</a> »» <a href="#" title="{{ middle }}">{{ middle }}</a>{% if last %} »» <a href="#" title="{{ last }}">{{ last }}</a>{% endif %}
+</div>
+<br>
 
     {% block main-row-div-1 %}
 
@@ -78,7 +77,7 @@
 
     {% block most-visited %}
         <ul class="categories">{% for visited in most_visited %}
-        <li><a href="#">{{ visited }}</a></li>
+        <li><a href="{% url 'uznation:most_visited' name=visited.title|slugify region=visited.region|slugify %}">{{ visited }}</a></li>
         {% endfor %}
         </ul>
     {% endblock %}
@@ -97,20 +96,20 @@
             {% for news in all_news %}
                 <li>
                     <div class="img">
-                        <a href="#"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}"></a>
+                        <a href="{% url 'uznation:news' title=news.news_title|slugify %}"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}"></a>
                     </div>
                     <div class="txt">
-                        <h3><a href="#">{{ news.news_title }}</a></h3>
+                        <h3><a href="{% url 'uznation:news' title=news.news_title|slugify %}">{{ news.news_title }}</a></h3>
                         <time datetime="2016-01-02 16:00">{{ news.news_created }}</time>
                     </div>
                 </li>
             {% endfor %}
 
         </ul>
-<!-- TODO: lastnews-->
+
     {% endblock %}
 {% block clock %}
-    {{ clock }}
+    <h2>{{ clock }}</h2>
 {% endblock %}
 
 {% block logo-footer %}
@@ -142,7 +141,7 @@
         {% for news in all_news.all %}
             <li>
                 <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
-                <span>{{ news.news_created|safe }}</span>
+                <span>{{ news.news_created}}</span>
             </li>
         {% endfor %}
     </ul>

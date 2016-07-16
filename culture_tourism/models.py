@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from redactor.fields import RedactorField
 from django.utils.translation import ugettext as _
+from taggit.managers import TaggableManager
 
 
 class Menu(models.Model):
@@ -41,6 +42,7 @@ class SubArticle(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     body = RedactorField(verbose_name=u'Text')
     photo = models.ImageField(upload_to='main_article/', blank=True, null=True)
+    tags = TaggableManager()
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=250, blank=True)
 
@@ -173,3 +175,9 @@ class MostVisited(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Maqollar(models.Model):
+    title = models.CharField(blank=True, max_length=512)
+    body = RedactorField(verbose_name=u'Text')
+    created = models.DateTimeField(auto_now_add=True)

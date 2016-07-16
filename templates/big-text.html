@@ -24,22 +24,47 @@
 </div><!-- /.navbar-collapse -->
 {% endblock %}
 
+{% block search %}
+<div class="search-box">
+<form method="post" action="." name="search">
+    <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
+    {% csrf_token %}
+    {{ search_form.as_p }}
+    <input type="submit" value="Search" name="search_web">
+</form>
+    <div class="btn-group">
+        <ul>
+        <li><a href="/en" class="btn btn-primary btn-sm">EN</a></li>
+        <li><a href="/ru" class="btn btn-primary btn-sm">RU</a></li>
+        <li><a href="/uz" class="btn btn-primary btn-sm">UZ</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
 {% block promo-photo %}
 <!-- TODO: put image here-->
     <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
 {% endblock %}
-<div class="hide-for-small bread-crumbs large-12 columns">
-    <a href="{% url 'uznation:home' %}" title="Home">Main page</a> »» <a href="#" title="{{ middle }}">{{ middle }}</a>{% if last %} »» <a href="#" title="{{ last }}">{{ last }}</a>{% endif %}
-</div>
-<br>
 
     {% block main-row-div-1 %}
-
+    <div class="hide-for-small bread-crumbs large-12 columns">
+    <a href="{% url 'uznation:home' %}">Bosh Sahifa</a> »» <a href="#">{{ second }}</a>{% if third %} »» <a href="#">
+        {{ third }}</a>{% endif %}
+    </div>
+    <br>
     <div class="img"><img src="{{ content.photo.url }}" alt="{{ content.title }}" style="width:900px; height:500px;"></div>
         <div class="text">
             <h2>{{ content.title }}</h2>
             <p>{{ content.body|safe }}</p>
         </div>
+        <p>
+        Tags:
+        {% for tag in content.tags.all %}
+            {{ tag.name }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </p>
 
 
         <!-- gallery -->

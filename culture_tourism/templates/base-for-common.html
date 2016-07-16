@@ -70,14 +70,8 @@
 						</div>
 					</nav>
 					<div class="search-area">
-						<div class="search-box">
-							<a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
-							<input type="search" name="search-word" placeholder="Search">
-						</div>
-						<div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-sm">EN</button>
-                          <button type="button" class="btn btn-primary btn-sm">RUS</button>
-                       </div>
+						{% block search %}
+                        {% endblock %}
 					</div>
 				</div>
 			</div>

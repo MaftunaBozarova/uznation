@@ -53,6 +53,10 @@ class PromoTranslation(TranslationOptions):
 class MostVisitedTranslation(TranslationOptions):
     fields = ('title', 'body',)
 
+
+class MaqolTranslation(TranslationOptions):
+    fields = ('title', 'body')
+
 translator.register(Menu, MenuTranslation)
 translator.register(SubMenu, SubMenuTranslation)
 translator.register(SubArticle, SubArticleTranslation)
@@ -66,3 +70,4 @@ translator.register(Gallery, GalleryTranslation)
 translator.register(Library, LibraryTranslation)
 translator.register(Promo, PromoTranslation)
 translator.register(MostVisited, MostVisitedTranslation)
+translator.register(Maqollar, MaqolTranslation)

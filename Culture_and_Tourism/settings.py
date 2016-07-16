@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from django.conf import global_settings
+from django.core.urlresolvers import reverse_lazy
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,10 +41,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'ckeditor',
     'easy_thumbnails',
     'redactor',
     'culture_tourism',
+    'account',
+    'social.apps.django_app.default',
+    'taggit',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +131,17 @@ STATICFILES_DIRS = (
     location('assets'),
 )
 
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = location('media/')
 
@@ -142,15 +156,9 @@ THUMBNAIL_ALIASES = {
     }
 }
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
-
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-
-CKEDITOR_CONFIGS = {
-     'default': {
-         'toolbar': 'full',
-         },
+REDACTOR_OPTIONS = {'lang': 'en', 'plugins': [
+    'clips', 'textexpander', 'filemanager', 'fullscreen',
+    'imagemanager', 'properties', 'source', 'table', 'video'
+]
 }
-
-REDACTOR_OPTIONS = {'lang': 'en', 'plugins': ['clips', 'textexpander', 'filemanager', 'fullscreen', 'imagemanager', 'properties', 'source', 'table', 'video']}
 REDACTOR_UPLOAD = 'uploads/'

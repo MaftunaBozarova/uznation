@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .models import (Regions, GeneralInfo, Slide,
-                     Writer, MainArticle, News, Gallery,
-                     Library, Feedback, Promo,
-                     Menu, SubMenu, MostVisited,
-                     OtherInfo, SubArticle)
+from .models import *
 
 
 class RegionAdmin(admin.ModelAdmin):
@@ -79,3 +75,8 @@ admin.site.register(SubArticle, SubArticleAdmin)
 class MostVisitedAdmin(admin.ModelAdmin):
     list_display = ['title', 'region']
 admin.site.register(MostVisited, MostVisitedAdmin)
+
+
+class MaqolAdmin(admin.ModelAdmin):
+    list_display = ['title', 'body']
+admin.site.register(Maqollar, MaqolAdmin)

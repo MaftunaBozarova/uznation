@@ -36,6 +36,7 @@
         <ul>
         <li><a href="/en" class="btn btn-primary btn-sm">EN</a></li>
         <li><a href="/ru" class="btn btn-primary btn-sm">RU</a></li>
+        <li><a href="/uz" class="btn btn-primary btn-sm">UZ</a></li>
         </ul>
     </div>
 </div>
@@ -55,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="image">
-                                <img src="{{ slide.photo|thumbnail_url:'slide' }}" alt="{{ slide.description }}">
+                                <img src="{{ slide.photo|thumbnail_url:'slide' }}" alt="{{ slide.title }}">
                             </div>
                             <span class="box"></span>
                         </div>
@@ -281,7 +282,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <p>{{ n.news_body|safe }}</p>
+                                        <p>{{ n.news_body|safe|truncatechars:250 }}</p>
                                     </li>
                                 </ul>
                             {% endif %}
@@ -298,7 +299,7 @@
                                         </ul>
                                 </li>
                                 <li>
-									<p>{{ n.news_body|safe }}</p>
+									<p>{{ n.news_body|safe|truncatechars:250 }}</p>
 								</li>
                                 </ul>
                             {% endif %}
@@ -315,7 +316,7 @@
                                         </ul>
                                 </li>
                                 <li>
-									<p>{{ n.news_body|safe }}</p>
+									<p>{{ n.news_body|safe|truncatechars:250 }}</p>
 								</li>
                                 </ul>
                             {% endif %}
@@ -327,7 +328,7 @@
 									<div class="img"><a href="#" class="team1-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
 									<div class="txt-box">
 										<h3><a href="#" class="team1-opener">{{ news.news_title }}</a></h3>
-										<span class="designation">{{ news.news_created }}</span>
+										<span class="designation">{{ news.news_created|date:'d.m.Y' }}</span>
 									</div>
 								</div>
                                     {% endif %}
@@ -336,7 +337,7 @@
 									<div class="img"><a href="#" class="team2-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
 									<div class="txt-box">
 										<h3><a href="#" class="team2-opener">{{ news.news_title }}</a></h3>
-										<span class="designation">{{ news.news_created }}</span>
+										<span class="designation">{{ news.news_created|date:'d.m.Y' }}</span>
 									</div>
 								</div>
                                 {% endif %}
@@ -345,7 +346,7 @@
 									<div class="img"><a href="#" class="team3-opener"><img src="{{ news.news_photo.url }}" alt="{{ news.news_title }}" style="width:260px; height:340px"></a></div>
 									<div class="txt-box">
 										<h3><a href="#" class="team3-opener">{{ news.news_title }}</a></h3>
-										<span class="designation">{{ news.news_created }}</span>
+										<span class="designation">{{ news.news_created|date:'d.m.Y' }}</span>
 									</div>
 								</div>
                                 {% endif %}
@@ -410,7 +411,7 @@
         {% for news in all_news.all %}
             <li>
                 <p><a href="{% url 'uznation:news' title=news.news_title|slugify %}"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
-                <span>{{ news.news_created }}</span>
+                <span>{{ news.news_created|date:'d.m.Y' }} {{ news.news_created|time }}</span>
             </li>
         {% endfor %}
     </ul>

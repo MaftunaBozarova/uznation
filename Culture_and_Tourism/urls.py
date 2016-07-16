@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', RedirectView.as_view(url='/uz')),
     url(r'^redactor/', include('redactor.urls')),
-url(r'', include('culture_tourism.urls', namespace='uznation')),
+    url(r'', include('culture_tourism.urls', namespace='uznation')),
+    url(r'^profile/', include('account.urls', namespace='profile')),
 ]
 
 urlpatterns += i18n_patterns('',

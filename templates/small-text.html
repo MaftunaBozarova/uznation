@@ -25,6 +25,24 @@
 </div><!-- /.navbar-collapse -->
 {% endblock %}
 
+{% block search %}
+<div class="search-box">
+<form method="post" action="." name="search">
+    <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
+    {% csrf_token %}
+    {{ search_form.as_p }}
+    <input type="submit" value="Search" name="search_web">
+</form>
+    <div class="btn-group">
+        <ul>
+        <li><a href="/en" class="btn btn-primary btn-sm">EN</a></li>
+        <li><a href="/ru" class="btn btn-primary btn-sm">RU</a></li>
+        <li><a href="/uz" class="btn btn-primary btn-sm">UZ</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
 {% block promo-photo %}
 <!-- TODO: put image here-->
     <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
@@ -50,7 +68,7 @@
 									<div class="txt">
 										<h2>{{ content.title }}</h2>
 										<p>{{ content.body|truncatechars:300|safe }}</p>
-										<a class="more" href="{% url 'uznation:small' title=content.title|slugify m=middle s=last %}">
+										<a class="more" href="{% url 'uznation:small' title=content.title|slugify s=last %}">
 											<span>BATAFSIL</span>
 											<i class="icon-right-thin"></i>
 										</a>
@@ -62,7 +80,7 @@
                                         <div class="txt">
                                             <h2>{{ content.title }}</h2>
                                             <p>{{ content.body|truncatechars:300|safe }}</p>
-                                            <a class="more" href="{% url 'uznation:small' title=content.title|slugify m=middle s=last%}">
+                                            <a class="more" href="{% url 'uznation:small' title=content.title|slugify s=last%}">
                                                 <span>BATAFSIL</span>
                                                 <i class="icon-right-thin"></i>
                                             </a>

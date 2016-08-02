@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load thumbnail %}
+{% load tree_tags %}
 <html lang="en">
 
 <head>
@@ -63,7 +64,24 @@
 								</button>
 							</div>
 							<!-- Collect the nav links, forms, and other content for toggling -->
-                        {% block nav_bar %}{% endblock %}
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        {% tree_show as menu %}
+        {% for m in menu %}
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ m.name }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for sub in m.get_children %}
+                            <li><a href="{% url 'uznation:menu' mmenu=sub.name|slugify %}">{{ sub.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+        {% endfor %}
+    </ul>
+</div>
 						</div>
 					</nav>
 					<div class="search-area">

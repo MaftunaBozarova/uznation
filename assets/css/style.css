@@ -5296,7 +5296,13 @@ float: right;
 #style-changer .yellow a {
 	background: #f39c12;
 }
-
+#comment
+{
+  margin: 0px -0.0625px 0px 0 px;
+  width: 352px;
+  height: 174px;
+  position: static;
+}
 @media (min-width: 768px) {
 	.commentlist-item .commentlist-item {
 		padding: 0 0 0 2em;

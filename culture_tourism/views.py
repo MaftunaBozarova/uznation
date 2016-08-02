@@ -12,6 +12,7 @@ from django.db.models import Q
 from taggit.models import Tag
 
 
+
 class NewsDetailView(DetailView):
     model = News
     template_name = 'news.html'
@@ -43,7 +44,7 @@ def feedback(request):
 
 def index(request):
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     slides = Slide.objects.all()
     news = News.objects.all()[:3]
     main_articles = MainArticle.objects.all()[:5]
@@ -59,8 +60,16 @@ def index(request):
             return render(request, 'search.html', {'searchN': resultsN, 'searchS': resultsS, 'searchR': resultsR, 'searchW': resultsW})
     else:
         search_form = SearchForm()
+    if "feedback_form" in request.POST:
+        feedback_form = FeedBackForm(data=request.POST)
+        if feedback_form.is_valid():
+            feedback_form.save()
+            #cd = feedback_form.cleaned_data
+            #Feedback.objects.create(name=cd['name'], email=cd['email'],
+                                 #   comment=cd['comment'])
+    else:
+        feedback_form = FeedBackForm()
 
-    feedback_form = FeedBackForm()
 
     return render(request, 'index.html', {'search_form': search_form,
         'info': info_last, 'menus': menus, 'feedback_form': feedback_form,
@@ -73,7 +82,7 @@ def mainarticle(request, pk):
     main_article = get_object_or_404(MainArticle, pk=pk)
     content = main_article.subarticle.last()
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
     news = News.objects.all()[:3]
     most_visited = MostVisited.objects.all()[:5]
@@ -97,18 +106,16 @@ def maqollar(request):
     return render(request, 'maqol.html', {'maqollar': maqol})
 
 
-def menu(request, m_menu, submenu):
-    m = get_object_or_404(Menu, slug=m_menu)
-    sm = get_object_or_404(SubMenu, slug=submenu)
+def menu(request, mmenu):
+    general = GeneralInfo.objects.all()
+    general = general.filter(menu_name=mmenu)
 
-    if submenu == 'ozbek-xalq-maqollari':
+    if mmenu == 'ozbek-xalq-maqollari':
         return redirect('/maqollar')
-
-    general = GeneralInfo.objects.get(info_menu=m, info_sub_menu=sm).subarticle.all()
     last = general.last()
 
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
     news = News.objects.all()[:3]
     most_visited = MostVisited.objects.all()[:5]
@@ -117,13 +124,12 @@ def menu(request, m_menu, submenu):
     clock = time.asctime()
     if general.count() < 4:
 
-        return render(request, 'big-text.html', {'content':last, 'second': submenu,
+        return render(request, 'big-text.html', {'content':last, 'second': mmenu,
                                                  'info': info_last, 'menus': menus, 'related_topics': general,
                                                  'all_news': news, 'promo': promo, 'clock': clock,
                                                  'most_visited': most_visited, 'gallery': gallery
                                                  })
     else:
-        object_list = general
         paginator = Paginator(general, 4)
         page = request.GET.get('page')
         try:
@@ -134,7 +140,7 @@ def menu(request, m_menu, submenu):
             posts = paginator.page(paginator.num_pages)
 
         return render(request,'small-text.html', {'page': page, 'posts':posts,
-            'info': info_last, 'menus': menus, 'second': submenu,
+            'info': info_last, 'menus': menus, 'second': mmenu,
             'all_news': news, 'promo': promo, 'clock': clock,
             'most_visited': most_visited, 'gallery': gallery
         })
@@ -144,7 +150,7 @@ def small_to_big(request, title, s):
     content = SubArticle.objects.get(slug=title)
     #general = content.generalinfo
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
     news = News.objects.all()[:3]
     most_visited = MostVisited.objects.all()[:5]
@@ -167,7 +173,7 @@ def news(request, title):
     all_news = News.objects.all()
 
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
     most_visited = MostVisited.objects.all()[:5]
     gallery = Gallery.objects.all()[:9]
@@ -187,7 +193,7 @@ def most_visited(request, name, region):
     most_visited_obj = MostVisited.objects.get(n_slug=name, r_slug=region)
 
     info_last = OtherInfo.objects.last()
-    menus = Menu.objects.all()
+    menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
     news = News.objects.all()[:3]
     most_visited = MostVisited.objects.all()[:5]

@@ -2,14 +2,6 @@ from modeltranslation.translator import translator, TranslationOptions
 from .models import *
 
 
-class MenuTranslation(TranslationOptions):
-    fields = ('name',)
-
-
-class SubMenuTranslation(TranslationOptions):
-    fields = ('name', )
-
-
 class SubArticleTranslation(TranslationOptions):
     fields = ('title', 'body',)
 
@@ -57,8 +49,6 @@ class MostVisitedTranslation(TranslationOptions):
 class MaqolTranslation(TranslationOptions):
     fields = ('title', 'body')
 
-translator.register(Menu, MenuTranslation)
-translator.register(SubMenu, SubMenuTranslation)
 translator.register(SubArticle, SubArticleTranslation)
 translator.register(MainArticle, MainArticleTranslation)
 translator.register(Regions, RegionTranslation)

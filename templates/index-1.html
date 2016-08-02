@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<!-- set the encoding of your site -->
 	<meta charset="utf-8">
@@ -21,6 +20,7 @@
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- include the site color stylesheet -->
 	<link rel="stylesheet" href="css/color/color.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 	<!-- Page Loader -->
@@ -55,33 +55,31 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
-								</button>                                                             
+								</button>                                                          
 							</div>
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav">
-									<li>
-										<a href="sanat.html"> O'zbek San'ati</a>
+									<li><a href="kontakt.html">Biz Haqimizda</a>
 									</li>
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Miliy Boylik<span class="caret"></span></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Media<span class="caret"></span></a>
 										 <ul class="dropdown-menu">
-											<li><a href="donli.html">Donli Ekinlar</a></li>
-											<li><a href="meva.html">Mevalar</a></li>
-											<li><a href="sabzavot.html">Sabzavotlar</a></li>
-											<li><a href="qazilma.html">Yer Qazilmalari</a></li>
+											<li><a href="galleriya.html">Galleriya</a></li>
+											<li><a href="kutubxona.html">Kutubxona</a></li>
+											<li><a href="tanlov.html">Tanlov</a></li>
 										 </ul>
+									</li>
+									<li><a href="viloyat.html">Viloyatlar</a>
 									</li>
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">O'zbek Adabiyoti<span class="caret"></span></a>
 										 <ul class="dropdown-menu">
 											<li>
-												<a href="#" role="button">Adiblar</a>
-												<ul class="drop">
-													<li><a href="adib-1.html">XVII asrgacha</a></li>
-													<li><a href="adib-2.html">XVII-XX asr oralig'i</a></li>
-													<li><a href="adib-3.html">XX-asrdan so'ng</a></li>
-												</ul>
+												<a href="sanat.html">O'zbek San'ati</a>	
+											</li>
+											<li>
+												<a href="adib-1.html">Adiblar</a>	
 											</li>
 											<li>
 												<a href="qoshiq.html">O'zbek Xalq Qo'shiqlari</a>
@@ -93,20 +91,25 @@
 											<li>
 												<a href="ertak.html">O'zbek Xalq Ertaklari</a>
 											</li>
+											<li>
+												<a href="tarix.html">O'zbekiston Tarixi</a>
+											</li>
 										 </ul>
 									</li>
-
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Milliy Qadriyatlar <span class="caret"></span></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Qadriyatlar <span class="caret"></span></a>
 										 <ul class="dropdown-menu">
 											<li>
-												<a href="#" role="button">To'y Marosimlari</a>
+												<a href="toy.html" role="button">To'y Marosimlari</a>
 												<ul class="drop">
 													<li><a href="sovchilik.html">Sovchilik</a></li>
 													<li><a href="toyOldi.html">To'y va To'y Oldi Marosimlar</a></li>
 													<li><a href="kelinSalom.html">Kelin Salom</a></li>
 													<li><a href="beshikToy.html">Beshik To'y</a></li>
 												</ul>
+											</li>
+											<li>
+												<a href="milliyBoylik.html" role="button">Milliy Boylik</a>
 											</li>
 											<li>
 												<a href="bayram.html">Milliy Bayramlar</a>
@@ -122,10 +125,6 @@
 											</li>
 										 </ul>
 									</li>	
-									<li><a href="kutubxona.html">Kutubxona</a></li>
-									<li><a href="galleriya.html">Galleriya</a></li>
-									<li><a href="viloyat.html">Viloyatlar</a></li>
-									<li><a href="obida.html">Tarixiy Obidalar</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
 
@@ -133,13 +132,14 @@
 					</nav>
 					<div class="search-area">
 						<div class="search-box">
-							<a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
+							<button class="btn btn-primary btn-xs" href="#"><i class="icon-search"><span></span></i></button>
 							<input type="search" placeholder="Search">
 						</div>
-						<div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-sm">EN</button>
-                          <button type="button" class="btn btn-primary btn-sm">RUS</button>
-                       </div>
+					  <div class="btn-group">
+                        <a href="sanat.html" class="btn btn-primary btn-sm btn-xs">EN</a>
+                        <a href="meva.html" class="btn btn-primary btn-sm btn-xs">RU</a>
+                        <a href="sanat.html" class="btn btn-primary btn-sm btn-xs">UZ</a>
+                      </div>
 					</div>
 				</div>
 			</div>
@@ -192,79 +192,61 @@
 			<div class="max-container">
 				<!-- info holder -->
 				<div class="info-holder">
-					<!-- info -->
-					<div class="info">
+					<!-- mustaqillikka 25-yil -->
+					<div class="info info-1">
 						<div class="img-frame wow fadeInLeft" data-wow-delay="0.6s">
 							<div class="text">
 								<span class="num">25</span>
 								<h2 class="tild">MUSTAQILLIK</h2>
-								<div class="box">
-							
-										<h3>O'zbekiston Kelajagi Buyuk Davlat</h3>
-									
+								<div class="box">							
+										<h3>O'zbekiston Kelajagi Buyuk Davlat</h3>								
 								</div>
 							</div>
-							<div class="image wow fadeInRight" data-wow-delay="0.6s"><img src="images/12312.jpg" alt="image description" style="width:403px; height:647px; "></div>
+							<div class="image wow fadeInRight" data-wow-delay="0.6s"><img src="images/12312.jpg" alt="image description" style="width:400px; height:550px; "></div>
 						</div>
 						<div class="txt-frame wow fadeInUp" data-wow-delay="0.6s">
 							<h3 style="color:blue">O'zbekiston 25 yoshda</h3>
 							<p>Davlatimiz rahbari tomonidan olib borilayotgan tadrijiy islohotlar siyosati va xalqimizning fidokorona mehnati tufayli O‘zbekiston mustaqillik yillarida ulkan natijalarga erishib, izchil taraqqiy etib bormoqda.
 O'zbekiston Mingyillik rivojlanish maqsadlariga erishish, qonun ustuvorligini ta’minlash, inson huquqlari, onalik va bolalikni himoya qilish, ta’lim tizimini takomillashtirishda ulkan yutuqlarni qo‘lga kiritdi. Ushbu muvaffaqiyatlar barqaror va inson manfaatlariga yo‘naltirilgan ijtimoiy-iqtisodiy islohotlar samarasidir.Garchi yurtimiz o‘zining navqiron 25 yoshini qarshi olayotgan bo‘lsa-da, ana shu qisqa muddatda yangi muvaffaqiyatlarni, yuksak marralarni zabt etayotir. Ularning har biri, ayniqsa, dunyo jadal o‘zgarib borayotgan, butun boshli mintaqalar surunkali nizolar o‘chog‘i va qonli to‘qnashuvlar girdobida qolgan bir davrda juda ahamiyatlidir.
-Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan, O‘zbekiston barcha jabhada qo‘lga kiritayotgan yutuqlari bilan dunyo hamjamiyatini hayratda qoldirib kelmoqda.
 </p>
-							<!--	<div class="signature">
-								<img src="images/large.jpg" alt="signature">
-							</div> -->
 						</div>
 					</div>
-					<!-- team info -->
-					<div class="info team">
+					<!-- mustaqillik -->
+					<div class="info info-2">
 						<div class="txt-frame wow fadeInUp" data-wow-delay="0.6s">
 						<p align="center" style="color:blue;font-size:18px;">2016-yil Sog'lom Ona va Bola Yili</p>
-							<ul class="text-box team1">
-								<li>
-								
-									<p>“O‘zbekiston” xalqaro anjumanlar saroyida 5-dekabr, shanba kuni O‘zbekiston Konstitutsiyasi qabul qilingan kunning 23 yilligiga bag‘ishlangan tantanali yig‘ilish bo‘lib o‘tdi.Unda davlat va jamoat arboblari, fan, madaniyat va san’at namoyandalari, poytaxt jamoatchiligi, O‘zbekistonda faoliyat ko‘rsatayotgan xorijiy davlatlarning elchixonalari va xalqaro tashkilotlar vakolatxonalari vakillari ishtirok etdi.</p>
-								</li>
-								<li>
-								
-									<p>O‘zbekiston Prezidenti Islom Karimov tantanali yig‘ilishda ma’ruza qildi. Prezident kirib kelayotgan yangi — 2016-yilni O‘zbekistonda Sog‘lom ona va bola yili deb e’lon qilishni taklif etdi.O‘zbekiston Prezidentining bu taklifi yig‘ilganlar tomonidan gulduros qarsaklar bilan qo‘llab-quvvatlandi.O‘zbekistonda 1997-yildan boshlab har bir yilga shu davr ichida taraqqiyotning muhim yo‘nalishlarini ifoda etadigan nom berish an’anaga aylangan.</p>
-									
-								</li>
-							</ul>
-							
+							<div class="text-box ">
+									<p>“O‘zbekiston” xalqaro anjumanlar saroyida 5-dekabr, shanba kuni O‘zbekiston Konstitutsiyasi qabul qilingan kunning 23 yilligiga bag‘ishlangan tantanali yig‘ilish bo‘lib o‘tdi.Unda davlat va jamoat arboblari, fan, madaniyat va san’at namoyandalari, poytaxt jamoatchiligi, O‘zbekistonda faoliyat ko‘rsatayotgan xorijiy davlatlarning elchixonalari va xalqaro tashkilotlar vakolatxonalari vakillari ishtirok etdi.<br/>O‘zbekiston Prezidenti Islom Karimov tantanali yig‘ilishda ma’ruza qildi. Prezident kirib kelayotgan yangi — 2016-yilni O‘zbekistonda Sog‘lom ona va bola yili deb e’lon qilishni taklif etdi.O‘zbekiston Prezidentining bu taklifi yig‘ilganlar tomonidan gulduros qarsaklar bilan qo‘llab-quvvatlandi.O‘zbekistonda 1997-yildan boshlab har bir yilga shu davr ichida taraqqiyotning muhim yo‘nalishlarini ifoda etadigan nom berish an’anaga aylangan.</p>
+							</div>							
 						</div>
 						<div class="img-frame">
 							<div class="image wow fadeInRight" data-wow-delay="0.6s">
-								<img src="images/bayram1.jpeg" alt="image description" class="team1-img" style="width:413px; height:551px;">
+								<img src="images/2016_yil.jpg" alt="image description" class="img" style="width:400px; height:550px;">
 							</div>
 							<div class="text wow fadeInRight" data-wow-delay="0.3s">
 								<h2 class="tild">2 0 1 6-yil</h2>
-								<div class="box">
-									
+								<div class="box">									
 									<div class="box-inner">
 										<h3>Sog'lom Ona va Bola Yili</h3>
 									</div>
-							<br/>
+							        <br/>
 									<br/>
 									<br/>
 								</div>
 								<a href="2016.html" class="more">batafsil</a>
 							</div>
 						</div>
-					</div>
+					</div>	
 					<!-- work info -->
-					<div class="info work">
+					<div class="info info-3">
 						<div class="txt-frame wow fadeInLeft" data-wow-delay="0.6s">
-							<h2 class="tild">O'ZBEK SAN'ATI</h2>
-		
+						    <h2 class="tild">SAN'AT</h2>
+							<!-- <span class="num">O'ZBEK  SAN'ATI</span>	-->	
 							<ul class="filter">
-								<li class="active"><a href="#">Barchasi</a></li>
-								
-								<li><a href="#" data-filter=".work-b">Kulolchilik</a></li>
-								<li><a href="#" data-filter=".work-w">Rassomlik</a></li> 
-								<li><a href="#" data-filter=".work-m">Zargarlik</a></li>
-								
+								<li class="active"><a href="#">Barcha<br/>San'at<br/>Galleriyasi<br/><br/></a></li>							
+								<li><a href="#" data-filter=".work-b">Kulolchilik<br/>San'ati<br/><br/></a></li>
+								<li><a href="#" data-filter=".work-w">Rassomlik<br/>San'ati<br/><br/></a></li> 
+								<li><a href="#" data-filter=".work-m">Zargarlik<br/>San'ati<br/><br/></a></li>					
 							</ul>
 							<br/>
 							<br/>
@@ -272,8 +254,8 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 						</div>
 						<div class="img-frame">
 							<div class="img-area" id="masonry-container">
-								<div class="item work-w wow fadeInUp" data-wow-delay="0.6s">
-									<img src="images/rassom.jpg" alt="image description" style="height:217px">
+								<div class="item work-w wow fadeInUp" data-wow-delay="0.6s" style="position: absolute; left: 289px; top: 0px; visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+									<img src="images/rassom.jpg" alt="image description" style="height:217px" >
 									<div class="caption">
 										<div class="c1">
 											<div class="c2">
@@ -333,7 +315,7 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 									</div>
 								</div>
 								<div class="item work-b wow fadeInUp" data-wow-delay="0.6s">
-									<img src="images/kulolchilik.jpg" alt="image description">
+									<img src="images/kulolchilik.jpg" alt="image description" style="height:265px;">
 									<div class="caption">
 										<div class="c1">
 											<div class="c2">
@@ -348,7 +330,7 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 									</div>
 								</div>
 								<div class="item add work-m wow fadeInUp" data-wow-delay="0.6s">
-									<img src="images/zargarlik.jpg" alt="image description">
+									<img src="images/zargarlik.jpg" alt="image description" style="width:579px; height=217px;">
 									<div class="caption">
 										<div class="c1">
 											<div class="c2">
@@ -366,7 +348,7 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 						</div>
 					</div>
 					<!-- blogs info -->
-					<div class="info blogs">
+					<div class="info info-4">
 						<div class="img-frame">
 							<div class="txt-holder wow fadeInUp" data-wow-delay="0.6s">
 								<div class="images">
@@ -402,7 +384,7 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 						</div>
 					</div>
 					<!-- testimonial info -->
-					<div class="info testimonial">
+					<div class="info info-5">
 						<div class="txt-frame wow fadeInLeft" data-wow-delay="0.6s">
 							<h2 class="tild">Turizm</h2>
 							<!-- <span class="num">05</span> -->
@@ -467,8 +449,92 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 							</div>
 						</div>
 					</div>
-					
-			 </main>
+					<div class="info info-6">
+						<div class="txt-frame wow fadeInUp" data-wow-delay="0.6s">
+							<ul class="text-box team1">
+								<li>
+									<h2><a href="#">Amir Temur</a></h2>
+									<span>Buyuk Alloma</span>
+									<ul class="social-networks">
+										<li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+										<li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+										<li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+										<li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+									</ul>
+								</li>
+								<li>
+									<p>info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1 info1</p>
+								</li>
+							</ul>
+							<ul class="text-box team2">
+								<li>
+									<h2><a href="#">Duradgorchilik</a></h2>
+									<span>San'at</span>
+									<ul class="social-networks">
+										<li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+										<li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+										<li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+										<li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+									</ul>
+								</li>
+								<li>
+									<p>info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2 info2</p>
+								</li>
+							</ul>
+							<ul class="text-box team3">
+								<li>
+									<h2><a href="#">Shartnoma imzolandi</a></h2>
+									<span>Siyosat</span>
+									<ul class="social-networks">
+										<li><a class="facebook" href="#"><i class="icon-facebook"></i><span>facebook</span></a></li>
+										<li><a class="twitter" href="#"><i class="icon-twitter"></i><span>twitter</span></a></li>
+										<li><a class="gplus" href="#"><i class="icon-gplus"></i><span>gplus</span></a></li>
+										<li><a class="pinterest-circled" href="#"><i class="icon-pinterest-circled"></i><span>pinterest-circled</span></a></li>
+									</ul>
+								</li>
+								<li>
+									<p>info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3 info3</p>
+								</li>
+							</ul>
+							<div class="img-holder wow fadeInUp" data-wow-delay="0.5s">
+								<div class="box box1">
+									<div class="img"><a href="#" class="team1-opener"><img src="images/amirtemur.jpg" alt="image description" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team1-opener">Amir Temur</a></h3>
+										<span class="designation">01.01.2010</span>
+									</div>
+								</div>
+								<div class="box box2">
+									<div class="img"><a href="#" class="team2-opener"><img src="images/fon1.jpg" alt="image description" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team2-opener">Duradgorlik</a></h3>
+										<span class="designation">01.01.2010</span>
+									</div>
+								</div>
+								<div class="box box3">
+									<div class="img"><a href="#" class="team3-opener"><img src="images/img7.jpg" alt="image description" style="width:260px; height:340px"></a></div>
+									<div class="txt-box">
+										<h3><a href="#" class="team3-opener">Qo'shma korxonalar</a></h3>
+										<span class="designation">01.01.2010</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="img-frame">
+							<div class="image wow fadeInRight" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInRight;">
+								<img src="images/amirtemur.jpg" alt="image description" class="team1-img" style="width:400px; height:550px">
+								<img src="images/fon1.jpg" alt="image description" class="team2-img" style="width:400px; height:550px; display:none;">
+								<img src="images/img7.jpg" alt="image description" class="team3-img" style="width:400px; height:550px; display:none;">
+							</div>
+							<div class="text wow fadeInRight" data-wow-delay="0.3s">
+								<h2 class="tild">Yangiliklar</h2>
+								<a href="#" class="more">Batafsil</a>
+							</div>
+						</div>			
+				    </div>	
+			   </div>
+			</div>			
+		 </main>
 		<!-- footer of the page -->
 		<footer id="footer">
 			<div class="max-container">
@@ -476,12 +542,7 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 					<div class="holder">
 						<strong class="logo-footer">
 							<a href="#">
-								<i class="icon">UZ</i>
-								<span>
-									<img alt="EAGLEEYES" src="images/logo-footer.svg">
-								</span>
-									<!--<img alt="EAGLEEYES" src="images/logo-footer.svg"> -->					
-							
+								<i class="icon">UzNation</i>						
 							</a>
 						</strong>
 						<!-- footer-txt -->
@@ -491,51 +552,54 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 								<div class="contact">
 									<address><span class="yellow">Address:</span>Inha universiteti, Ziyoliar ko'ch<br>Toshkent,  O'zbekiston</address>
 									<span class="email"><span class="yellow">Email: </span><a href="inha.uz"> mail.inha.uz</a></span>
-									<span class="tel"><span class="yellow">Post: </span><a href="tel:998712899999">+99871 289 28 30</a></span>
+									<span class="tel"><span class="yellow">Post: </span><a href="tel:998712899999">+99871 289 99 99</a></span>
 								</div>
 							</div>
-							<ul class="testimonial">
+							    <ul class="testimonial">
 								<li>
 									<p><a href="#"><i class="glyphicon glyphicon-check"></i><span> MIT.uz 2016-yil g'oliblari aniqlandi.</span></a><br/> Umar, Shakhnoza, Maftuna MIT. uz 2016-yilning eng yaxshoi sayti bo'yicha birinchi o'rinni egallashdi.</p>
 									<span>8-avgust, 2016-yil</span>
 								</li>
 								<li>
-									<p><a href="#"><i class="glyphicon glyphicon-check"></i><span> Inha universitetida g'oliblar aniqlandi</span></a><br/> Inha universitetlarining studentlari O'zbekidtonda dasturchilik va texnologiya sohalarida katta yutuqlarga erishib kelishyapti</p>
+									<p><a href="#"><i class="glyphicon glyphicon-check"></i><span> Inha universitetida g'oliblar aniqlandi</span></a><br/> Inha universitetlarining studentlari O'zbekidtonda dasturchilik va texnologiya sohalarida...</p>
 								</li>
 								<li>
-									<p><a href="#"><i class="glyphicon glyphicon-check"></i><span> Google io16 IUTda bo'ldi.</span></a><br/> Frontend, Backend, C#, C++, Java kabi komputer tillarida mashxur professorlaar kelib INha talabalari uchun o'zlarining yutuqlarini so'zlab berishdi</p>
+									<p><a href="#"><i class="glyphicon glyphicon-check"></i><span> Google io16 IUTda bo'ldi.</span></a><br/> Frontend, Backend, C#, C++, Java kabi komputer...</p>
 								</li>
-							</ul>
+							    </ul>
 						</div>
 					</div>
 					<div class="frame">
-						<div class="wpcf7">
-							<form action="http://htmlbeans.com/demos/eagleeyes/inc/process.php" class="wpcf7-form f-contact-form" enctype="multipart/form-data">
-								<h3>Sizning fikringiz biz uchun muhim!</h3>
-								<div class="rows">
-									<span class="wpcf7-form-control-wrap text-field-required">
-										<input type="text" name="text-field-required" value="" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required text-field-class wpcf7-use-title-as-watermark" size="12" placeholder="Name">
-									</span>
-								</div>
-								<div class="rows">
-									<span class="wpcf7-form-control-wrap Emailfield">
-										<input type="email" name="Emailfield" value="" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email email-class wpcf7-use-title-as-watermark" size="12" placeholder="Email" />
-									</span>
-								</div>
-								<div class="rows">
-									<span class="wpcf7-form-control-wrap textarea">
-										<textarea name="textarea" class="wpcf7-form-control wpcf7-textarea textarea-class wpcf7-use-title-as-watermark" rows="9" cols="39" placeholder="Your Comment"></textarea>
-									</span>
-								</div>
-								<input id="submit" type="submit" value="SEND MESSAGES">
-							</form>
-	                        <div class="done-massage">
-	                            <strong>Thank you!</strong> We have received your message.
-	                        </div>
-						</div>
+                        <div class="wpcf7">
+ <div class="footer-widget contact-widget">
+ <div class="widget-title"><h3>Biz Bilan Bog'laning!</h3></div>
+ <form class="form-horizontal" role="form">
+   <div class="form-group">
+     <div class="col-sm-10">
+       <input type="text" class="form-control" id="usr" placeholder="Enter Name">
+     </div>
+   </div>
+   <div class="form-group">
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+    </div><div class="form-group">
+      <div class="col-sm-10">
+      <label for="comment">For Comment</label>
+      <textarea class="form-control" id="comment" rows="8"></textarea>
+      </div>
+    </div>    
+    <div class="form-group">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-default">Send Messages</button>
+      </div>
+    </div>
+  </form>
+    </div>
+                        </div>
 					</div>
-						  </div>
-						  <div class="f2">
+				</div>
+			    <div class="f2">
 					<!-- sub-nav -->
 					<ul class="sub-nav">
 						<li><a href="ramz.html">Milliy Ramzlar</a></li>
@@ -546,9 +610,6 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 					</ul>
 					<span class="copyright">Copyright <a href="#">UZNation</a> &copy; 2016. All sourses reserved.</span>
 				</div>
-
-			</div>
-				
 			</div>
 		</footer>
 		<span id="back-top" class="fa fa-arrow-up"></span>
@@ -580,6 +641,33 @@ Jahon moliyaviy inqirozi va sayyoramiz iqtisodiyotidagi beqarorlikka qaramasdan,
 		)
 			document.querySelector('head').appendChild(msViewportStyle)
 		}
+			$(document).ready(function(){
+				var item = $('.slid_img .slid_img_inner');
+				var Children = item.children();
+				item.width(Children.size() * 303);
+			});
+			$('.slider_right').live('click' , function(e){
+				var target_item = $('.slid_img');
+				var targetScroll = target_item.scrollLeft();
+				target_item.animate({
+					scrollLeft : targetScroll + 303
+				} , 500);
+				e.preventDefault();
+			});
+			$('.slider_left').live('click' , function(e){
+				var target_item = $('.slid_img');
+				var targetScroll = target_item.scrollLeft();
+				target_item.animate({
+					scrollLeft : targetScroll - 303
+				} , 500);
+				e.preventDefault();
+			});
+		
+			$(window).load(function() {
+				$('#slider').nivoSlider({
+					directionNav:false
+				});
+			});
 	</script>
 </body>
 

@@ -1,28 +1,9 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load tree_tags %}
 {% block title %}UzNation{% endblock %}
 
 {% block site-logo %}<!--<img src="{{ info.site_logo|thumbnail_url:'site_logo' }}" alt="UzNation">-->{% endblock %}
-
-{% block nav_bar %}
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-        {% for m in menus %}
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ m.name }}<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% for sub in m.sub_menu.all %}
-                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </li>
-        {% endfor %}
-    </ul>
-</div><!-- /.navbar-collapse -->
-{% endblock %}
 
 {% block search %}
 <div class="search-box">
@@ -419,37 +400,44 @@
 {% endblock %}
 
 {% block feedback %}
-    <form action="{% url 'uznation:feedback' %}" class="wpcf7-form f-contact-form" enctype="multipart/form-data">
-								<h3>Give us feedback</h3>
-        {% csrf_token %}
-        <div class="rows">
-            <span class="wpcf7-form-control-wrap text-field-required">
-                <input type="text" name="name" value="" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required text-field-class wpcf7-use-title-as-watermark" size="12" placeholder="Name">
-            </span>
-        </div>
-        <div class="rows">
-            <span class="wpcf7-form-control-wrap Emailfield">
-                <input type="email" name="email" value="" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email email-class wpcf7-use-title-as-watermark" size="12" placeholder="Email" />
-            </span>
-        </div>
-        <div class="rows">
-            <span class="wpcf7-form-control-wrap textarea">
-                <textarea name="comment" class="wpcf7-form-control wpcf7-textarea textarea-class wpcf7-use-title-as-watermark" rows="9" cols="39" placeholder="Your Comment"></textarea>
-            </span>
-        </div>
-        <input id="submit" type="submit" value="SEND MESSAGES">
-    </form>
-    <div class="done-massage">
-        <strong>Thank you!</strong> We have received your message.
+    <div class="footer-widget contact-widget">
+        <div class="widget-title"><h3>Biz Bilan Bog'laning!</h3></div>
+        <form class="form-horizontal" role="form" method="post">
+            {% csrf_token %}
+            {{ feedback_form.non_field_errors }}
+            {{ feedback_form.media }}
+   <div class="form-group">
+     <div class="col-sm-10">
+         {{ feedback_form.name.errors }}
+         {{ feedback_form.name }}
+     </div>
+   </div>
+   <div class="form-group">
+      <div class="col-sm-10">
+          {{ feedback_form.email.errors }}
+          {{ feedback_form.email }}
+      </div>
+    </div><div class="form-group">
+      <div class="col-sm-10">
+      {{ feedback_form.comment.errors }}
+          {{ feedback_form.comment }}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-10">
+        <input type="submit" value="Send Message" name="feedback_form" class="btn btn-default">
+      </div>
+    </div>
+  </form>
     </div>
 {% endblock %}
 
 {% block sub-nav %}
 <ul class="sub-nav">
     {% for m in menus.all %}
-        {% if not m.sub_menu %}
-            <li><a href="#">{{ m.name }}</a></li>
-        {% endif %}
+
+        <li><a href="#">{{ m.name }}</a></li>
+
     {% endfor %}
 </ul>
 {% endblock %}

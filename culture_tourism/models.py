@@ -3,39 +3,20 @@ from django.utils.text import slugify
 from redactor.fields import RedactorField
 from django.utils.translation import ugettext as _
 from taggit.managers import TaggableManager
+from treebeard.mp_tree import MP_Node
 
 
-class Menu(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=250, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Menu, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ('-created',)
-
-
-class SubMenu(models.Model):
-    menu = models.ForeignKey(Menu, related_name='sub_menu')
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=250, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
+class Menyu(MP_Node):
+    name = models.CharField(max_length=100, verbose_name=_('Menu:'), unique=True)
+    url = models.URLField(verbose_name=_('Url:'), blank=True, null=True)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(SubMenu, self).save(*args, **kwargs)
-
     class Meta:
-        ordering = ('-created',)
+        verbose_name_plural = _('Menus')
+        verbose_name = _('Menu')
 
 
 class SubArticle(models.Model):
@@ -55,10 +36,14 @@ class SubArticle(models.Model):
 
 
 class GeneralInfo(models.Model):
-    info_menu = models.ForeignKey(Menu, related_name='category')
-    info_sub_menu = models.ForeignKey(SubMenu, related_name='submenu', blank=True, null=True)
+    menu = models.ForeignKey(Menyu, related_name='general_menus', null=True)
+    menu_name = models.SlugField(max_length=150, blank=True)
     subarticle = models.ManyToManyField(SubArticle, related_name='generalinfo')
     author = models.CharField(max_length=100, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.menu_name = slugify(self.menu.name)
+        super(GeneralInfo, self).save(*args, **kwargs)
 
 
 class MainArticle(models.Model):
@@ -144,11 +129,7 @@ class Feedback(models.Model):
     name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(blank=True)
     comment = RedactorField(verbose_name=u'Text')
-    created = models.DateTimeField(auto_now_add=True, blank=True)
-    active = models.BooleanField(default=False, blank=True)
 
-    class Meta:
-        ordering = ('created',)
 
 
 class Promo(models.Model):

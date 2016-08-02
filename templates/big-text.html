@@ -14,8 +14,8 @@
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        {% for sub in m.sub_menu.all %}
-                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
+                        {% for sub in m.get_children %}
+                            <li><a href="{% url 'uznation:menu' mmenu=m.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -174,10 +174,6 @@
 
 {% block sub-nav %}
 <ul class="sub-nav">
-    {% for m in menus.all %}
-        {% if not m.sub_menu %}
-            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
-        {% endif %}
-    {% endfor %}
+
 </ul>
 {% endblock %}

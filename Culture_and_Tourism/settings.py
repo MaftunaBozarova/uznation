@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'account',
     'social.apps.django_app.default',
     'taggit',
+    'treebeard',
 )
 
 MIDDLEWARE_CLASSES = (

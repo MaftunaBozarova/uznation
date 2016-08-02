@@ -5284,6 +5284,13 @@ float: right;
 #style-changer .twine a {
 	background: #c59d5f;
 }
+#comment
+{
+  margin: 0px -0.0625px 0px 0 px;
+  width: 352px;
+  height: 174px;
+  position: static;
+}
 
 #style-changer .ucla-gold a {
 	background: #ffb600;

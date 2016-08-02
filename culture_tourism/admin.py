@@ -1,5 +1,12 @@
 from django.contrib import admin
 from .models import *
+from treebeard.forms import movenodeform_factory
+from treebeard.admin import TreeAdmin
+
+
+class AdminMenu(TreeAdmin):
+    form = movenodeform_factory(Menyu)
+admin.site.register(Menyu, AdminMenu)
 
 
 class RegionAdmin(admin.ModelAdmin):
@@ -8,7 +15,7 @@ admin.site.register(Regions, RegionAdmin)
 
 
 class NationalInfoAdmin(admin.ModelAdmin):
-    list_display = ['info_menu', 'info_sub_menu', 'author']
+    list_display = ['menu', 'author']
 admin.site.register(GeneralInfo, NationalInfoAdmin)
 
 
@@ -48,23 +55,13 @@ admin.site.register(Library, LibraryAdmin)
 
 
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'created']
+    list_display = ['name', 'email']
 admin.site.register(Feedback, FeedbackAdmin)
 
 
 class PromoAdmin(admin.ModelAdmin):
     list_display = ['promo_text', 'promo_photo']
 admin.site.register(Promo, PromoAdmin)
-
-
-class MenuAdmin(admin.ModelAdmin):
-    list_display = ['name', 'created']
-admin.site.register(Menu, MenuAdmin)
-
-
-class SubMenuAdmin(admin.ModelAdmin):
-    list_display = ['menu', 'name', 'created']
-admin.site.register(SubMenu, SubMenuAdmin)
 
 
 class SubArticleAdmin(admin.ModelAdmin):

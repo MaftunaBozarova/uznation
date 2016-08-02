@@ -31,7 +31,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns('',
 
-                             url(r'', include('culture_tourism.urls', namespace='uznation')),
+                             #url(r'', include('culture_tourism.urls', namespace='uznation')),
                              )
 
 

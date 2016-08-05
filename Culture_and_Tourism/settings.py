@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 from django.conf import global_settings
 from django.core.urlresolvers import reverse_lazy
+import django.conf.locale
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +45,6 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'redactor',
     'culture_tourism',
-    'account',
     'social.apps.django_app.default',
     'taggit',
     'treebeard',
@@ -52,6 +52,8 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # translation
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -59,8 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    # translation
-    'django.middleware.locale.LocaleMiddleware',
+
 )
 
 ROOT_URLCONF = 'Culture_and_Tourism.urls'
@@ -75,8 +76,10 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.i18n',
             ],
         },
     },
@@ -91,7 +94,7 @@ WSGI_APPLICATION = 'Culture_and_Tourism.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': location('Uznation'),
+        'NAME': location('ptoject'),
     }
 }
 
@@ -117,6 +120,18 @@ LANGUAGES = (
     ('uz', gettext_noop('Uzbek')),
 )
 
+EXTRA_LANG_INFO = {
+    'uz': {
+        'bidi': True,
+        'code': 'uz',
+        'name': 'Uzbek',
+        'name_local': u'\u0626\u06C7\u064A\u063A\u06C7\u0631 \u062A\u0649\u0644\u0649', #unicode codepoints here
+    },
+}
+d = dict(django.conf.locale.LANG_INFO.items()).copy()
+d.update(dict(EXTRA_LANG_INFO.items()))
+django.conf.locale.LANG_INFO = d
+
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
 LOCALE_PATH = (
@@ -140,7 +155,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
 )
 
 MEDIA_URL = '/media/'

@@ -21,19 +21,16 @@ from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    #url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', RedirectView.as_view(url='/uz')),
     url(r'^redactor/', include('redactor.urls')),
-    url(r'', include('culture_tourism.urls', namespace='uznation')),
-    url(r'^profile/', include('account.urls', namespace='profile')),
+    # url(r'', include('culture_tourism.urls', namespace='uznation')),
 ]
 
 urlpatterns += i18n_patterns('',
-
-                             #url(r'', include('culture_tourism.urls', namespace='uznation')),
+                             url(r'', include('culture_tourism.urls', namespace='uznation')),
                              )
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

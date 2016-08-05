@@ -49,6 +49,12 @@ class MostVisitedTranslation(TranslationOptions):
 class MaqolTranslation(TranslationOptions):
     fields = ('title', 'body')
 
+
+class MenuTranslation(TranslationOptions):
+    fields = ('name',)
+
+
+translator.register(Menyu, MenuTranslation)
 translator.register(SubArticle, SubArticleTranslation)
 translator.register(MainArticle, MainArticleTranslation)
 translator.register(Regions, RegionTranslation)

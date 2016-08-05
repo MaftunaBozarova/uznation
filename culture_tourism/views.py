@@ -107,13 +107,10 @@ def maqollar(request):
 
 
 def menu(request, mmenu):
-    general = GeneralInfo.objects.all()
-    general = general.filter(menu_name=mmenu)
-
+    general = GeneralInfo.objects.filter(menu_name=mmenu)
     if mmenu == 'ozbek-xalq-maqollari':
         return redirect('/maqollar')
-    last = general.last()
-
+    last = general.last().subarticle.last()
     info_last = OtherInfo.objects.last()
     menus = Menyu.get_root_nodes()
     promo = Promo.objects.last()
@@ -124,7 +121,7 @@ def menu(request, mmenu):
     clock = time.asctime()
     if general.count() < 4:
 
-        return render(request, 'big-text.html', {'content':last, 'second': mmenu,
+        return render(request, 'big-text.html', {'content': last, 'second': mmenu,
                                                  'info': info_last, 'menus': menus, 'related_topics': general,
                                                  'all_news': news, 'promo': promo, 'clock': clock,
                                                  'most_visited': most_visited, 'gallery': gallery

@@ -85,8 +85,19 @@
 						</div>
 					</nav>
 					<div class="search-area">
-                        {% block search %}
-                        {% endblock %}
+                        {% search as search_form %}
+                    <form class="search-box" method="post" action="." name="search">
+        {% csrf_token %}
+            {{ search_form.non_field_errors }}
+            <button class="btn btn-primary btn-xs" style="padding-bottom: 1px" href="#" type="submit" name="search_web"><i class="icon-search"><span></span></i></button>
+            {{ search_form.search_query.errors }}
+            {{ search_form.search_query }}
+        </form>
+        <div class="btn-group">
+            <a href="/en" class="btn btn-primary btn-sm btn-xs">EN</a>
+            <a href="/ru" class="btn btn-primary btn-sm btn-xs">RU</a>
+            <a href="/uz" class="btn btn-primary btn-sm btn-xs">UZ</a>
+        </div>
 					</div>
 				</div>
 			</div>

@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'taggit',
     'treebeard',
+    'ckeditor'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -69,18 +70,20 @@ ROOT_URLCONF = 'Culture_and_Tourism.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [location('templates')]
-        ,
-        'APP_DIRS': True,
+        'DIRS': [location('templates')],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.i18n',
             ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+            'debug': DEBUG,
         },
     },
 ]
@@ -177,3 +180,14 @@ REDACTOR_OPTIONS = {'lang': 'en', 'plugins': [
 ]
 }
 REDACTOR_UPLOAD = 'uploads/'
+
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 400,
+        'width': 1200,
+    },
+}

@@ -1,7 +1,53 @@
+from django import forms
 from django.contrib import admin
 from .models import *
+from ckeditor.widgets import CKEditorWidget as RedactorEditor
 from treebeard.forms import movenodeform_factory
 from treebeard.admin import TreeAdmin
+
+
+class WriterForm(forms.ModelForm):
+    class Meta:
+        model = Writer
+        fields = '__all__'
+        widgets = {
+            'description_en': RedactorEditor(),
+            'description_ru': RedactorEditor(),
+            'description_uz': RedactorEditor()
+        }
+
+
+class SubArticleForm(forms.ModelForm):
+    class Meta:
+        model = SubArticle
+        fields = '__all__'
+        widgets = {
+            'body_en': RedactorEditor(),
+            'body_ru': RedactorEditor(),
+            'body_uz': RedactorEditor()
+        }
+
+
+class RegionsForm(forms.ModelForm):
+    class Meta:
+        model = Regions
+        fields = '__all__'
+        widgets = {
+            'region_description_en': RedactorEditor(),
+            'region_description_ru': RedactorEditor(),
+            'region_description_uz': RedactorEditor()
+        }
+
+
+class SlideForm(forms.ModelForm):
+    class Meta:
+        model = Regions
+        fields = '__all__'
+        widgets = {
+            'description_en': RedactorEditor(),
+            'description_ru': RedactorEditor(),
+            'description_uz': RedactorEditor()
+        }
 
 
 class AdminMenu(TreeAdmin):
@@ -11,6 +57,8 @@ admin.site.register(Menyu, AdminMenu)
 
 class RegionAdmin(admin.ModelAdmin):
     list_display = ['region_name', 'region_photo']
+    form = RegionsForm
+
 admin.site.register(Regions, RegionAdmin)
 
 
@@ -21,6 +69,8 @@ admin.site.register(GeneralInfo, NationalInfoAdmin)
 
 class WriterAdmin(admin.ModelAdmin):
     list_display = ['name', 'photo', 'period']
+    form = WriterForm
+
 admin.site.register(Writer, WriterAdmin)
 
 
@@ -31,16 +81,19 @@ admin.site.register(MainArticle, MainArticleAdmin)
 
 class SlideAdmin(admin.ModelAdmin):
     list_display = ['title', 'photo', 'description']
+    form = SlideForm
 admin.site.register(Slide, SlideAdmin)
 
 
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['news_title', 'news_photo', 'news_created']
+
 admin.site.register(News, NewsAdmin)
 
 
 class OtherInfoAdmin(admin.ModelAdmin):
     list_display = ['address', 'phone_1', 'email', 'website']
+
 admin.site.register(OtherInfo, OtherInfoAdmin)
 
 
@@ -66,6 +119,7 @@ admin.site.register(Promo, PromoAdmin)
 
 class SubArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'photo', 'body', 'created']
+    form = SubArticleForm
 admin.site.register(SubArticle, SubArticleAdmin)
 
 

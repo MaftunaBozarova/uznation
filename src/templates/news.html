@@ -1,6 +1,6 @@
 {% extends 'base-for-common.html' %}
 
-{% block title %}UzNation{% endblock %}
+{% block title %}UzNation | News{% endblock %}
 <!-- TODO: put image here-->
 {% block site-logo %}<!--<img src="" alt="UzNation">-->{% endblock %}
 
@@ -14,8 +14,8 @@
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        {% for sub in m.get_children %}
-                            <li><a href="{% url 'uznation:menu' mmenu=m.name|slugify %}">{{ sub.name }}</a></li>
+                        {% for sub in m.sub_menu.all %}
+                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -26,7 +26,7 @@
 
 {% block search %}
 <div class="search-box">
-<form method="post" action="." name="search">
+<form method="post" action="" name="search">
     <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
     {% csrf_token %}
     {{ search_form.as_p }}
@@ -48,55 +48,11 @@
 {% endblock %}
 
     {% block main-row-div-1 %}
-    <div class="hide-for-small bread-crumbs large-12 columns">
-    <a href="{% url 'uznation:home' %}">Bosh Sahifa</a> »» <a href="#">{{ second }}</a>{% if third %} »» <a href="#">
-        {{ third }}</a>{% endif %}
-    </div>
-    <br>
-    <div class="img"><img src="{{ content.photo.url }}" alt="{{ content.title }}" style="width:900px; height:500px;"></div>
+
+    <div class="img"><img src="{{ content.news_photo.url }}" alt="{{ content.news_title }}" style="width:900px; height:500px;"></div>
         <div class="text">
-            <h2>{{ content.title }}</h2>
-            <p>{{ content.body|safe }}</p>
-        </div>
-        <p>
-        Tags:
-        {% for tag in content.tags.all %}
-            {{ tag.name }}
-            {% if not forloop.last %}, {% endif %}
-        {% endfor %}
-        </p>
-
-
-        <!-- gallery -->
-
-        <!-- project-area -->
-        <div class="masonry-holder">
-            <h2>Mavzuga Oid</h2>
-            <ul class="masonry add">
-                {% if related_topics %}
-                {% for related in related_topics.all %}
-                <li>
-                    <div class="holder">
-                        <div class="img">
-                            <img src="{{ related.photo.url }}" alt="{{ related.title }}">
-                        </div>
-                        <div class="caption">
-                            <div class="c1">
-                                <div class="c2">
-                                    <strong class="title">{{ related.title }}</strong>
-
-                                    <ul class="icons">
-                                        <li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
-                                        <li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            {% endif %}
-            </ul>
+            <h2>{{ content.news_title }}</h2>
+            <p>{{ content.news_body|safe }}</p>
         </div>
 {% endblock %}
 
@@ -158,6 +114,7 @@
                 <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
             {% endif %}
             {% if info.phone_2 %}
+                <br>
                 <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
             {% endif %}
         </div>
@@ -166,7 +123,7 @@
         {% for news in all_news.all %}
             <li>
                 <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
-                <span>{{ news.news_created}}</span>
+                <span>{{ news.news_created }}</span>
             </li>
         {% endfor %}
     </ul>
@@ -174,6 +131,10 @@
 
 {% block sub-nav %}
 <ul class="sub-nav">
-
+    {% for m in menus.all %}
+        {% if not m.sub_menu %}
+            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
+        {% endif %}
+    {% endfor %}
 </ul>
 {% endblock %}

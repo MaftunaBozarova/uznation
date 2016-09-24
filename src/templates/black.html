@@ -31,7 +31,7 @@
 
 {% block search %}
 <div class="search-box">
-<form method="post" action="." name="search">
+<form method="post" action="" name="search">
     <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
     {% csrf_token %}
     {{ search_form.as_p }}

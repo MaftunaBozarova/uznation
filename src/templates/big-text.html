@@ -1,9 +1,8 @@
 {% extends 'base-for-common.html' %}
 
 {% block title %}UzNation{% endblock %}
-
 <!-- TODO: put image here-->
-{% block site-logo %}<img src="" alt="UzNation">{% endblock %}
+{% block site-logo %}<!--<img src="" alt="UzNation">-->{% endblock %}
 
 {% block nav_bar %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -15,8 +14,8 @@
                         {{ m.name }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        {% for sub in m.sub_menu.all %}
-                            <li><a href="{% url 'uznation:menu' m_menu=m.name|slugify submenu=sub.name|slugify %}">{{ sub.name }}</a></li>
+                        {% for sub in m.get_children %}
+                            <li><a href="{% url 'uznation:menu' mmenu=m.name|slugify %}">{{ sub.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -27,7 +26,7 @@
 
 {% block search %}
 <div class="search-box">
-<form method="post" action="." name="search">
+<form method="post" action="" name="search">
     <a class="search" href="#"><i class="icon-search"><span>search</span></i></a>
     {% csrf_token %}
     {{ search_form.as_p }}
@@ -48,74 +47,77 @@
     <img src="{{ promo.promo_photo.url }}" alt="{{ promo.promo_text }}" class="font">
 {% endblock %}
 
-<div class="hide-for-small bread-crumbs large-12 columns">
-    <a href="{% url 'uznation:home' %}" title="Home">Main page</a> »» <a href="#" title="{{ middle }}">{{ middle }}</a>{% if last %} »» <a href="#" title="{{ last }}">{{ last }}</a>{% endif %}
-</div>
-<br>
-
     {% block main-row-div-1 %}
-    <div class="col-lg-9 col-sm-8 col-xs-12 col-lg-push-3 col-sm-push-4 content">
-						<div class="article-holder">
-                            {% for content in posts %}
-                            <!-- article -->
-							<article class="article side">
-                            {% if forloop.counter|divisibleby:2 %}
-                                <div class="image wow fadeInLeft" data-wow-delay="0.6s">
-									<img src="{{ content.photo.url }}" alt="{{ content.title }}">
-								</div>
-                                <div class="text wow fadeInRight" data-wow-delay="0.6s">
+    <div class="hide-for-small bread-crumbs large-12 columns">
+    <a href="{% url 'uznation:home' %}">Bosh Sahifa</a> »» <a href="#">{{ second }}</a>{% if third %} »» <a href="#">
+        {{ third }}</a>{% endif %}
+    </div>
+    <br>
+    <div class="img"><img src="{{ content.photo.url }}" alt="{{ content.title }}" style="width:900px; height:500px;"></div>
+        <div class="text">
+            <h2>{{ content.title }}</h2>
+            <p>{{ content.body|safe }}</p>
+        </div>
+        <p>
+        Tags:
+        {% for tag in content.tags.all %}
+            {{ tag.name }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </p>
 
-									<div class="txt">
-										<h2>{{ content.title }}</h2>
-										<p>{{ content.body|truncatechars:300|safe }}</p>
-										<a class="more" href="{% url 'uznation:small' title=content.title|slugify s=last %}">
-											<span>BATAFSIL</span>
-											<i class="icon-right-thin"></i>
-										</a>
-									</div>
-								</div>
-                                {% else %}
-                                    <div class="text wow fadeInLeft" data-wow-delay="0.6s">
 
-                                        <div class="txt">
-                                            <h2>{{ content.title }}</h2>
-                                            <p>{{ content.body|truncatechars:300|safe }}</p>
-                                            <a class="more" href="{% url 'uznation:small' title=content.title|slugify s=last%}">
-                                                <span>BATAFSIL</span>
-                                                <i class="icon-right-thin"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="image wow fadeInRight" data-wow-delay="0.6s">
-                                        <img src="{{ content.photo.url }}" alt="{{ content.title }}">
-                                    </div>
-                            {% endif %}
+        <!-- gallery -->
 
-							</article>
-                            {% endfor %}
-						</div>
-						<!-- paginations -->
-						{% include 'pagination.html' with page=posts %}
-					</div>
+        <!-- project-area -->
+        <div class="masonry-holder">
+            <h2>Mavzuga Oid</h2>
+            <ul class="masonry add">
+                {% if related_topics %}
+                {% for related in related_topics.all %}
+                <li>
+                    <div class="holder">
+                        <div class="img">
+                            <img src="{{ related.photo.url }}" alt="{{ related.title }}">
+                        </div>
+                        <div class="caption">
+                            <div class="c1">
+                                <div class="c2">
+                                    <strong class="title">{{ related.title }}</strong>
+
+                                    <ul class="icons">
+                                        <li><a href="#"><i class="icon-resize-full-alt"></i> <span>resize</span></a></li>
+                                        <li><a href="#"><i class="icon-attach"></i> <span>attach</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            {% endif %}
+            </ul>
+        </div>
 {% endblock %}
 
     {% block most-visited %}
         <ul class="categories">{% for visited in most_visited %}
-        <li><a href="{% url 'uznation:most_visited' name=visited.title|slugify region=visited.region|slugify %}">{{ visited.title }}</a></li>
+        <li><a href="{% url 'uznation:most_visited' name=visited.title|slugify region=visited.region|slugify %}">{{ visited }}</a></li>
         {% endfor %}
         </ul>
     {% endblock %}
 
     {% block pics %}
-<ul class="instagram">
+        <ul class="instagram">
         {% for pic in gallery %}
         <li><a href="#"><img src="{{ pic.photo.url }}" alt="{{ pic.description|safe }}" style="width:83px; height:83px;"></a></li>
         {% endfor %}
         </ul>
+<!-- TODO: pics-->
     {% endblock %}
 
     {% block last-news %}
-<ul class="recent">
+        <ul class="recent">
             {% for news in all_news %}
                 <li>
                     <div class="img">
@@ -129,6 +131,7 @@
             {% endfor %}
 
         </ul>
+
     {% endblock %}
 {% block clock %}
     <h2>{{ clock }}</h2>
@@ -140,7 +143,7 @@
 {% endblock %}
 
 {% block footer-txt %}
- <div class="text">
+    <div class="text">
         <p>
             {{ info.description|safe }}
         </p>
@@ -155,7 +158,6 @@
                 <span class="tel"><span class="yellow">Post: </span>{{ info.phone_1 }}</span>
             {% endif %}
             {% if info.phone_2 %}
-                <br>
                 <span class="tel"><span class="yellow">      </span>{{ info.phone_2 }}</span>
             {% endif %}
         </div>
@@ -164,7 +166,7 @@
         {% for news in all_news.all %}
             <li>
                 <p><a href="#"><i class="glyphicon glyphicon-check"></i><span>{{ news.news_title|safe }}</span></a></p>
-                <span>{{ news.news_created }}</span>
+                <span>{{ news.news_created}}</span>
             </li>
         {% endfor %}
     </ul>
@@ -172,10 +174,6 @@
 
 {% block sub-nav %}
 <ul class="sub-nav">
-    {% for m in menus.all %}
-        {% if not m.sub_menu %}
-            <li><a href="{% url 'uznation:info-m' menu=m.name %}">{{ m.name }}</a></li>
-        {% endif %}
-    {% endfor %}
+
 </ul>
 {% endblock %}

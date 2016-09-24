@@ -11,7 +11,7 @@ django-treebeard==4.0.1
 django-wysiwyg-redactor==0.4.9
 easy-thumbnails==2.3
 oauthlib==1.1.2
-Pillow==3.2.0
+Pillow==3.3.1
 PyJWT==1.4.1
 pysolr==3.5.0
 python-social-auth==0.2.19

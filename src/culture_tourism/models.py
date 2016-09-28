@@ -52,7 +52,7 @@ class MainArticle(models.Model):
     subarticle = models.ManyToManyField(SubArticle, related_name='mainarticle')
 
     def __str__(self):
-        return '{} {}'.format(self.b_tild, self.b_box)
+        return '%s %s' % (self.b_tild, self.b_box)
 
 
 class Regions(models.Model):
